@@ -1,5 +1,5 @@
 name: Quality Control
-
+permissions: {}
 on: push
 
 jobs:
