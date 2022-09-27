@@ -14,12 +14,12 @@ jobs:
           - '3.1'
 
     steps:
-    - name: Checkout project
-      uses: actions/checkout@v3.0.2
-    - name: Install project-compatible Ruby
-      uses: ruby/setup-ruby@v1.117.0
-      with:
-        ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true
-    - name: Run tests
-      run: bundle exec rake test
+      - name: Checkout project
+        uses: actions/checkout@v3.0.2
+      - name: Install project-compatible Ruby
+        uses: ruby/setup-ruby@v1.117.0
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Run tests
+        run: bundle exec rake test
