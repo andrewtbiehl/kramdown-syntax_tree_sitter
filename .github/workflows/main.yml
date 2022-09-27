@@ -1,3 +1,5 @@
+# The following workflow runs upon pushing new commits to any branches
+# It runs and reports on code quality
 name: Quality Control
 permissions: {}
 on: push
