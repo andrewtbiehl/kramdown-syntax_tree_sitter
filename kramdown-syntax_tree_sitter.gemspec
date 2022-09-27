@@ -5,10 +5,10 @@ require_relative "lib/kramdown/syntax_tree_sitter/version"
 Gem::Specification.new do |spec|
   spec.name = "kramdown-syntax_tree_sitter"
   spec.version = Kramdown::SyntaxTreeSitter::VERSION
-  spec.authors = ["TODO: Write your name"]
+  spec.authors = ["Andrew T. Biehl"]
   spec.email = ["TODO: Write your email address"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
+  spec.summary = "Syntax highlight code with Tree-Sitter in Kramdown."
   spec.description = "TODO: Write a longer description or delete this line."
   spec.homepage = "TODO: Put your gem's website or public repo URL here."
   spec.required_ruby_version = ">= 2.6.0"
