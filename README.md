@@ -27,3 +27,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/kramdown-syntax_tree_sitter.
+
+## License
+
+This project is released under the MIT License.
+
+The text for this license can be found in [the project's LICENSE.txt file](LICENSE.txt).
