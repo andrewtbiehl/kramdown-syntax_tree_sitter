@@ -26,7 +26,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/kramdown-syntax_tree_sitter.
+Bug reports and pull requests are welcome on GitHub at https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter.
 
 ## License
 
