@@ -1,4 +1,4 @@
-name: Ruby
+name: Quality Control
 
 on:
   push:
