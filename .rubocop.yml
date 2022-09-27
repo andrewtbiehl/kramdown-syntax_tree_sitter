@@ -1,0 +1,7 @@
+require:
+  - rubocop-minitest
+  - rubocop-rake
+AllCops:
+  NewCops: enable
+Gemspec/RequireMFA:
+  Enabled: false
