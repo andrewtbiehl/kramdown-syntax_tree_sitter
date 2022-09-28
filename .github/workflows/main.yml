@@ -5,8 +5,8 @@ permissions: {}
 on: push
 jobs:
   check:
-    runs-on: ubuntu-20.04
     name: Check quality (Ruby ${{matrix.ruby}})
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         ruby:
