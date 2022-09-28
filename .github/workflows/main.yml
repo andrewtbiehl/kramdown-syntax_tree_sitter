@@ -4,9 +4,9 @@ name: Quality Control
 permissions: {}
 on: push
 jobs:
-  build:
+  check:
     runs-on: ubuntu-20.04
-    name: Ruby ${{matrix.ruby}}
+    name: Check quality (Ruby ${{matrix.ruby}})
     strategy:
       matrix:
         ruby:
