@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors = ['Andrew T. Biehl']
   spec.summary = 'Syntax highlight code with Tree-Sitter in Kramdown.'
   spec.license = 'MIT'
+  spec.homepage = 'https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter'
   spec.files = Dir.chdir(__dir__) do
     `git ls-files -z`.split("\x0").reject do |f|
       (f == __FILE__) || f.match(%r{\A(?:(?:bin|test|spec|features)/|\.(?:git|travis|circleci)|appveyor)})
