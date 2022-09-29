@@ -5,10 +5,11 @@ permissions: {}
 on: push
 jobs:
   check:
-    name: Check quality (Ruby ${{matrix.ruby-version}})
-    runs-on: ubuntu-20.04
+    name: Check quality (Ruby ${{matrix.ruby-version}} on ${{matrix.os}})
+    runs-on: ${{matrix.os}}
     strategy:
       matrix:
+        os: [ubuntu-20.04]
         ruby-version: ['2.7', '3.0', '3.1']
     steps:
       - name: Checkout project
