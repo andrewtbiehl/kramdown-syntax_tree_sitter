@@ -5,18 +5,18 @@ permissions: {}
 on: push
 jobs:
   check:
-    name: Check quality (Ruby ${{matrix.ruby}})
+    name: Check quality (Ruby ${{matrix.ruby-version}})
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        ruby: ['2.7', '3.0', '3.1']
+        ruby-version: ['2.7', '3.0', '3.1']
     steps:
       - name: Checkout project
         uses: actions/checkout@v3.0.2
       - name: Install project-compatible Ruby
         uses: ruby/setup-ruby@v1.117.0
         with:
-          ruby-version: ${{matrix.ruby}}
+          ruby-version: ${{matrix.ruby-version}}
           bundler: 2.3.22
           bundler-cache: true
           cache-version: ${{hashFiles('*.gemspec')}}
