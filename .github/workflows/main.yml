@@ -22,4 +22,4 @@ jobs:
           bundler-cache: true
           cache-version: ${{hashFiles('*.gemspec')}}
       - name: Run checks and tests
-        run: bundle exec rake
+        run: bundle exec rake rubocop test
