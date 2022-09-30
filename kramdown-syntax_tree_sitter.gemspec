@@ -9,11 +9,14 @@ Gem::Specification.new do |spec|
   spec.summary = 'Syntax highlight code with Tree-Sitter in Kramdown.'
   spec.license = 'MIT'
   spec.homepage = 'https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter'
-  spec.files = Dir.chdir(__dir__) do
-    `git ls-files -z`.split("\x0").reject do |f|
-      (f == __FILE__) || f.match(%r{\A(?:(?:bin|test|spec|features)/|\.(?:git|travis|circleci)|appveyor)})
-    end
-  end
+  spec.files = Dir[
+    '.rubocop.yml',
+    'Gemfile',
+    'LICENSE.txt',
+    'README.md',
+    'Rakefile',
+    'lib/**/*.rb'
+  ]
   spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rubocop', '~> 1.36'
