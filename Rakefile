@@ -13,6 +13,8 @@ RuboCop::RakeTask.new
 Rake::TestTask.new(:test) do |task_|
   task_.libs << 'test'
   task_.pattern = 'test/**/test_*.rb'
+  # Used to silence noisy warnings for some dependencies
+  task_.warning = false
 end
 
 task default: %i[rubocop test]
