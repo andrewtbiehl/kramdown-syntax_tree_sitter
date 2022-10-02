@@ -19,20 +19,23 @@ PYTHON_ROUGE_HTML = <<~HTML
   </code></pre></div></div>
 HTML
 
+MARKDOWN_HIGHLIGHTER_HTML_COMBINATIONS = [
+  [PYTHON_MARKDOWN, nil, PYTHON_NO_HIGHLIGHT_HTML],
+  [PYTHON_MARKDOWN, :rouge, PYTHON_ROUGE_HTML]
+].freeze
+
 module Kramdown
   class TestSyntaxHighlighting < Minitest::Test
     def test_that_tree_sitter_has_a_version_number
       refute_nil Converter::SyntaxHighlighter::TreeSitter::VERSION
     end
 
-    def test_that_it_can_use_no_highlighting
-      actual = Document.new(PYTHON_MARKDOWN, syntax_highlighter: nil).to_html
-      assert_equal actual, PYTHON_NO_HIGHLIGHT_HTML
-    end
-
-    def test_that_it_can_use_rouge_highlighting
-      actual = Document.new(PYTHON_MARKDOWN, syntax_highlighter: :rouge).to_html
-      assert_equal actual, PYTHON_ROUGE_HTML
+    MARKDOWN_HIGHLIGHTER_HTML_COMBINATIONS.each do |markdown, highlighter, expected|
+      highlighter_name = highlighter.nil? ? 'no' : highlighter
+      define_method "test_that_it_can_use_#{highlighter_name}_highlighting" do
+        actual = Document.new(markdown, syntax_highlighter: highlighter).to_html
+        assert_equal actual, expected
+      end
     end
   end
 end
