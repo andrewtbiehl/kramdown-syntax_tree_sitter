@@ -9,6 +9,10 @@ PYTHON_MARKDOWN = <<~MARKDOWN
   ~~~
 MARKDOWN
 
+PYTHON_INLINE_MARKDOWN = <<~MARKDOWN
+  The code `print('Hello, World!')`{: .language-python} is valid Python.
+MARKDOWN
+
 PYTHON_NO_HIGHLIGHT_HTML = <<~HTML
   <pre><code class="language-python">print('Hello, World!')
   </code></pre>
@@ -19,9 +23,19 @@ PYTHON_ROUGE_HTML = <<~HTML
   </code></pre></div></div>
 HTML
 
+PYTHON_TREE_SITTER_HTML = <<~HTML
+  <div class="language-python highlighter-tree-sitter"><pre><code>print('Hello, World!')
+  </code></pre></div>
+HTML
+
+PYTHON_TREE_SITTER_INLINE_HTML = <<~HTML
+  <p>The code <code class="language-python highlighter-tree-sitter">print('Hello, World!')</code> is valid Python.</p>
+HTML
+
 MARKDOWN_HIGHLIGHTER_HTML_COMBINATIONS = [
   [PYTHON_MARKDOWN, nil, PYTHON_NO_HIGHLIGHT_HTML],
-  [PYTHON_MARKDOWN, :rouge, PYTHON_ROUGE_HTML]
+  [PYTHON_MARKDOWN, :rouge, PYTHON_ROUGE_HTML],
+  [PYTHON_MARKDOWN, :'tree-sitter', PYTHON_TREE_SITTER_HTML]
 ].freeze
 
 # Helper function for invoking Kramdown to render Markdown into HTML using a
@@ -42,6 +56,11 @@ module Kramdown
         actual = convert_to_html markdown, highlighter
         assert_equal actual, expected
       end
+    end
+
+    def test_that_it_can_use_tree_sitter_inline_highlighting
+      actual = convert_to_html PYTHON_INLINE_MARKDOWN, :'tree-sitter'
+      assert_equal actual, PYTHON_TREE_SITTER_INLINE_HTML
     end
   end
 end
