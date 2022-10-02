@@ -24,6 +24,12 @@ MARKDOWN_HIGHLIGHTER_HTML_COMBINATIONS = [
   [PYTHON_MARKDOWN, :rouge, PYTHON_ROUGE_HTML]
 ].freeze
 
+# Helper function for invoking Kramdown to render Markdown into HTML using a
+# specific syntax highlighter.
+def convert_to_html(markdown, highlighter)
+  Kramdown::Document.new(markdown, syntax_highlighter: highlighter).to_html
+end
+
 module Kramdown
   class TestSyntaxHighlighting < Minitest::Test
     def test_that_tree_sitter_has_a_version_number
@@ -33,7 +39,7 @@ module Kramdown
     MARKDOWN_HIGHLIGHTER_HTML_COMBINATIONS.each do |markdown, highlighter, expected|
       highlighter_name = highlighter.nil? ? 'no' : highlighter
       define_method "test_that_it_can_use_#{highlighter_name}_highlighting" do
-        actual = Document.new(markdown, syntax_highlighter: highlighter).to_html
+        actual = convert_to_html markdown, highlighter
         assert_equal actual, expected
       end
     end
