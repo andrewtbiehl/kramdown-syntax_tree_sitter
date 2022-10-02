@@ -4,7 +4,7 @@ require 'test_helper'
 
 module Kramdown
   class TestSyntaxTreeSitter < Minitest::Test
-    def test_that_it_has_a_version_number
+    def test_that_tree_sitter_has_a_version_number
       refute_nil ::Kramdown::Converter::SyntaxHighlighter::TreeSitter::VERSION
     end
   end
