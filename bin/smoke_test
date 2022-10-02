@@ -6,4 +6,4 @@
 
 require 'kramdown/syntax_tree_sitter'
 
-print Kramdown::SyntaxTreeSitter::VERSION
+print Kramdown::Converter::SyntaxHighlighter::TreeSitter::VERSION
