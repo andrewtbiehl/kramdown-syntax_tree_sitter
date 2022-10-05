@@ -7,13 +7,13 @@ TODO: Delete this and the text above, and describe your gem
 Install the gem and add to the application's Gemfile by executing:
 
 ```shell
-$ bundle add kramdown-syntax_tree_sitter
+bundle add kramdown-syntax_tree_sitter
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
 ```shell
-$ gem install kramdown-syntax_tree_sitter
+gem install kramdown-syntax_tree_sitter
 ```
 
 ## Usage
