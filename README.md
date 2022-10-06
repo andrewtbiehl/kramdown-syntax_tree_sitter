@@ -65,8 +65,7 @@ After checking out the project, run `bundle install` from within it to install
 dependencies. Then run `bundle exec rake --tasks` to list all available Rake tasks. Each
 task can be invoked via `bundle exec rake <task name>`. For example,
 `bundle exec rake test` runs unit tests and `bundle exec rake smoke_test` installs the
-gem and runs a smoke test against it. Also, running `bin/console` starts an interactive
-prompt that allows for experimentation with the gem.
+gem and runs a smoke test against it.
 
 This project uses [GitHub Actions](https://github.com/features/actions) workflows to
 facilitate continuous integration. The 'Quality Control' workflow runs any time new
