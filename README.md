@@ -73,6 +73,20 @@ new changes before such changes are pushed.
 This project is not currently open for contributions, but will be as soon as the initial
 MVP version is released.
 
+## About
+
+[Tree-sitter](https://tree-sitter.github.io/tree-sitter) is a modern, general-purpose
+parsing library that outclasses many existing tools at the task of syntax highlighting.
+This plugin adapts Tree-sitter's native highlighter for
+[Kramdown](https://kramdown.gettalong.org), so that Tree-sitter's superior highlighting
+capabilities can be easily leveraged in the context of rendering Markdown.
+
+The basic functionality of this plugin was originally presented as a blog post:
+*["Syntax highlight your Jekyll site with Tree-sitter!"](https://andrewtbiehl.com/blog/jekyll-tree-sitter)*.
+This article explains the original use case and inspiration for the project, walks
+through its implementation, and even provides some fun examples of syntax highlighting
+with Tree-sitter.
+
 ## License
 
 This project is released under the MIT License.
