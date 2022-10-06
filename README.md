@@ -1,4 +1,4 @@
-# Kramdown::SyntaxTreeSitter
+# Kramdown Tree-sitter Highlighter
 
 TODO: Delete this and the text above, and describe your gem
 
