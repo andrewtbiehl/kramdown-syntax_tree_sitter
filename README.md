@@ -38,7 +38,12 @@ gem build && gem install kramdown-syntax_tree_sitter
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'kramdown'
+require 'kramdown/syntax_tree_sitter'
+
+Kramdown::Document.new(text, syntax_highlighter: :'tree-sitter').to_html
+```
 
 ## Development
 
