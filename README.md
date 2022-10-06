@@ -61,6 +61,13 @@ unit tests and `bundle exec rake smoke_test` installs the gem and runs a smoke t
 against it. Also, running `bin/console` starts an interactive prompt that allows for
 experimentation with the gem.
 
+This project uses [GitHub Actions](https://github.com/features/actions) workflows to
+facilitate continuous integration. The 'Quality Control' workflow runs any time new
+commits are pushed to GitHub on any branch. This workflow runs the `rubocop`, `test`,
+and `smoke_test` Rake tasks to verify that new changes meet the project's code quality
+standards, so it is strongly recommended that these tasks are first run locally against
+new changes before such changes are pushed.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at
