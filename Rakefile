@@ -19,7 +19,7 @@ CONSOLE_HELP = <<~TEXT
   puts Kramdown::Document.new(example_text, syntax_highlighter: :'tree-sitter').to_html
 TEXT
 GEM_SPECIFICATION = Gem::Specification.load Dir.glob('*.gemspec').first
-SMOKE_TEST_EXECUTABLE_FILE = File.expand_path 'bin/smoke_test.rb'
+SMOKE_TEST_EXECUTABLE_FILE = File.expand_path 'smoke_test.rb'
 
 RuboCop::RakeTask.new
 
