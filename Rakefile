@@ -60,7 +60,6 @@ desc('Start an interactive prompt for experimentation with the gem')
 task :console do
   require 'irb'
   require 'kramdown/syntax_tree_sitter'
-
   puts CONSOLE_HELP
   ARGV.clear
   IRB.start(__FILE__)
