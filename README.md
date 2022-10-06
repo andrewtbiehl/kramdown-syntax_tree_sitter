@@ -50,11 +50,12 @@ plugin is incomplete and subject to change significantly.
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run
-`rake test` to run the tests. You can also run `bin/console` for an interactive prompt
-that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`.
+After checking out the project, run `bin/setup` from within it to install dependencies.
+Then run `bundle exec rake --tasks` to list all available Rake tasks. Each task can be
+invoked via `bundle exec rake <task name>`. For example, `bundle exec rake test` runs
+unit tests and `bundle exec rake smoke_test` installs the gem and runs a smoke test
+against it. Also, running `bin/console` starts an interactive prompt that allows for
+experimentation with the gem.
 
 ## Contributing
 
