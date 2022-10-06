@@ -70,8 +70,8 @@ new changes before such changes are pushed.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at
-https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter.
+This project is not currently open for contributions, but will be as soon as the initial
+MVP version is released.
 
 ## License
 
