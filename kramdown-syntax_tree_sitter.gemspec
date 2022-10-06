@@ -5,7 +5,7 @@ require_relative 'lib/kramdown/syntax_tree_sitter/version'
 Gem::Specification.new do |spec|
   spec.name = 'kramdown-syntax_tree_sitter'
   spec.version = Kramdown::Converter::SyntaxHighlighter::TreeSitter::VERSION
-  spec.summary = 'Syntax highlight code with Tree-Sitter via Kramdown.'
+  spec.summary = 'Syntax highlight code with Tree-sitter via Kramdown.'
   spec.author = 'Andrew T. Biehl'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 2.7'
