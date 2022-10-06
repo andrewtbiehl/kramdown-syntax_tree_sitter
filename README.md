@@ -45,6 +45,9 @@ require 'kramdown/syntax_tree_sitter'
 Kramdown::Document.new(text, syntax_highlighter: :'tree-sitter').to_html
 ```
 
+Please note that this project is in early initial development; the behavior of this
+plugin is incomplete and subject to change significantly.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run
