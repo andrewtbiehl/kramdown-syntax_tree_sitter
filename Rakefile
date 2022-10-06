@@ -5,6 +5,19 @@ require 'rake/testtask'
 require 'rubocop/rake_task'
 require 'rubygems/commands/uninstall_command'
 
+CONSOLE_HELP = <<~TEXT
+  Kramdown and kramdown/syntax_tree_sitter imported.
+
+  Try running the following code snippet from the console:
+
+  example_text = <<~MARKDOWN
+    ~~~python
+    print('Hello, World!')
+    ~~~
+  MARKDOWN
+
+  puts Kramdown::Document.new(example_text, syntax_highlighter: :'tree-sitter').to_html
+TEXT
 GEM_SPECIFICATION = Gem::Specification.load Dir.glob('*.gemspec').first
 SMOKE_TEST_EXECUTABLE_FILE = File.expand_path 'bin/smoke_test'
 
@@ -41,4 +54,16 @@ def uninstall_gem(name)
   command = Gem::Commands::UninstallCommand.new
   command.handle_options ['--ignore-dependencies', name]
   command.execute
+end
+
+desc('Start an interactive prompt for experimentation with the gem')
+task :console do
+  require 'bundler/setup'
+  require 'irb'
+  require 'kramdown'
+  require 'kramdown/syntax_tree_sitter'
+
+  puts CONSOLE_HELP
+  ARGV.clear
+  IRB.start(__FILE__)
 end
