@@ -58,9 +58,7 @@ end
 
 desc('Start an interactive prompt for experimentation with the gem')
 task :console do
-  require 'bundler/setup'
   require 'irb'
-  require 'kramdown'
   require 'kramdown/syntax_tree_sitter'
 
   puts CONSOLE_HELP
