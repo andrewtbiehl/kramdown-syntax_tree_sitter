@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'kramdown'
-require 'test_helper'
+require 'kramdown/syntax_tree_sitter'
+require 'minitest/autorun'
 
 PYTHON_MARKDOWN = <<~MARKDOWN
   ~~~python

@@ -24,7 +24,6 @@ SMOKE_TEST_EXECUTABLE_FILE = File.expand_path 'smoke_test.rb'
 RuboCop::RakeTask.new
 
 Rake::TestTask.new(:test) do |task_|
-  task_.libs << 'test'
   task_.pattern = 'test/**/test_*.rb'
   # Used to silence noisy warnings for some dependencies
   task_.warning = false
