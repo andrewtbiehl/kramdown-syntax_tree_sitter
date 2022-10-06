@@ -1,3 +1,6 @@
+***:construction: This project is in early initial development and is not yet
+functional. :construction:***
+
 # Kramdown Tree-sitter Highlighter
 
 ***Syntax highlight code with [Tree-sitter](https://tree-sitter.github.io/tree-sitter)
