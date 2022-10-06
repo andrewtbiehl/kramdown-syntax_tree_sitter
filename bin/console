@@ -3,6 +3,7 @@
 
 require 'bundler/setup'
 require 'irb'
+require 'kramdown'
 require 'kramdown/syntax_tree_sitter'
 
 IRB.start(__FILE__)
