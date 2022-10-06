@@ -2,6 +2,15 @@
 
 TODO: Delete this and the text above, and describe your gem
 
+## Requirements and compatibility
+
+This plugin is built for [Kramdown](https://kramdown.gettalong.org) and hence requires a
+compatible [Ruby](https://www.ruby-lang.org) installation to function. It is officially
+compatible with the following environments:
+
+- **Ruby**: 2.7, 3.0, 3.1
+- **Platforms**: MacOS, Linux
+
 ## Installation
 
 For projects using [Bundler](https://bundler.io) for dependency management, run the
