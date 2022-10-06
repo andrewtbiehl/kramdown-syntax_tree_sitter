@@ -1,6 +1,12 @@
 # Kramdown Tree-sitter Highlighter
 
-TODO: Delete this and the text above, and describe your gem
+***Syntax highlight code with [Tree-sitter](https://tree-sitter.github.io/tree-sitter)
+via [Kramdown](https://kramdown.gettalong.org).***
+
+This is a syntax highlighter plugin for [Kramdown](https://kramdown.gettalong.org) that
+leverages
+[Tree-sitter's native syntax highlighter](https://tree-sitter.github.io/tree-sitter/syntax-highlighting)
+to highlight code blocks (and spans) when rendering HTML.
 
 ## Requirements and compatibility
 
