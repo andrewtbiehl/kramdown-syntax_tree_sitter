@@ -11,7 +11,9 @@ leverages
 [Tree-sitter's native syntax highlighter](https://tree-sitter.github.io/tree-sitter/syntax-highlighting)
 to highlight code blocks (and spans) when rendering HTML.
 
-## Requirements and compatibility
+## Getting started
+
+### Requirements and compatibility
 
 This plugin is built for [Kramdown](https://kramdown.gettalong.org) and hence requires a
 compatible [Ruby](https://www.ruby-lang.org) installation to function. It is officially
@@ -20,7 +22,7 @@ compatible with the following environments:
 - **Ruby**: 2.7, 3.0, 3.1
 - **Platforms**: MacOS, Linux
 
-## Installation
+### Installation
 
 For projects using [Bundler](https://bundler.io) for dependency management, run the
 following command to both install the gem and add it to the Gemfile:
@@ -48,7 +50,12 @@ Kramdown::Document.new(text, syntax_highlighter: :'tree-sitter').to_html
 Please note that this project is in early initial development; the behavior of this
 plugin is incomplete and subject to change significantly.
 
-## Development
+## Contributing
+
+This project is not currently open for contributions, but will be as soon as the initial
+MVP version is released.
+
+### Development
 
 To set up a compatible local development environment, please first refer to the
 ['Requirements and Compatibility'](#requirements-and-compatibility) section of this
@@ -67,11 +74,6 @@ commits are pushed to GitHub on any branch. This workflow runs the `rubocop`, `t
 and `smoke_test` Rake tasks to verify that new changes meet the project's code quality
 standards, so it is strongly recommended that these tasks are first run locally against
 new changes before such changes are pushed.
-
-## Contributing
-
-This project is not currently open for contributions, but will be as soon as the initial
-MVP version is released.
 
 ## About
 
