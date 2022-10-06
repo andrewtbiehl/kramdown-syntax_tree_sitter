@@ -50,6 +50,10 @@ plugin is incomplete and subject to change significantly.
 
 ## Development
 
+To set up a compatible local development environment, please first refer to the
+['Requirements and Compatibility'](#requirements-and-compatibility) section of this
+document.
+
 After checking out the project, run `bin/setup` from within it to install dependencies.
 Then run `bundle exec rake --tasks` to list all available Rake tasks. Each task can be
 invoked via `bundle exec rake <task name>`. For example, `bundle exec rake test` runs
