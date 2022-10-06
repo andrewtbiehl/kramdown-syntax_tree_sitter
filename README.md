@@ -4,14 +4,15 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
+For projects using [Bundler](https://bundler.io) for dependency management, run the
+following command to both install the gem and add it to the Gemfile:
 
 ```shell
 bundle add kramdown-syntax_tree_sitter --github andrewtbiehl/kramdown-syntax_tree_sitter
 ```
 
-If bundler is not being used to manage dependencies, download this project's repository
-and then run the following command from within it to build and install the gem:
+Otherwise, download this project's repository and then run the following command from
+within it to build and install the gem:
 
 ```shell
 gem build && gem install kramdown-syntax_tree_sitter
