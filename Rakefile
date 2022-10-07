@@ -21,6 +21,8 @@ TEXT
 GEM_SPECIFICATION = Gem::Specification.load Dir.glob('*.gemspec').first
 SMOKE_TEST_EXECUTABLE_FILE = File.expand_path 'smoke_test.rb'
 
+task default: %i[rubocop test]
+
 RuboCop::RakeTask.new
 
 Rake::TestTask.new(:test) do |task_|
@@ -28,8 +30,6 @@ Rake::TestTask.new(:test) do |task_|
   # Used to silence noisy warnings for some dependencies
   task_.warning = false
 end
-
-task default: %i[rubocop test]
 
 desc 'Run a smoke test'
 task smoke_test: :install do
@@ -49,12 +49,6 @@ rescue Gem::InstallError => e
   puts e
 end
 
-def uninstall_gem(name)
-  command = Gem::Commands::UninstallCommand.new
-  command.handle_options ['--ignore-dependencies', name]
-  command.execute
-end
-
 desc 'Start an interactive prompt for experimentation with the gem'
 task :console do
   require 'irb'
@@ -62,4 +56,10 @@ task :console do
   puts CONSOLE_HELP
   ARGV.clear
   IRB.start(__FILE__)
+end
+
+def uninstall_gem(name)
+  command = Gem::Commands::UninstallCommand.new
+  command.handle_options ['--ignore-dependencies', name]
+  command.execute
 end
