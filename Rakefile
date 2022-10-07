@@ -31,7 +31,7 @@ end
 
 task default: %i[rubocop test]
 
-desc('Run a smoke test')
+desc 'Run a smoke test'
 task smoke_test: :install do
   expected = GEM_SPECIFICATION.version.to_s
   actual = `#{SMOKE_TEST_EXECUTABLE_FILE}`
@@ -42,7 +42,7 @@ task smoke_test: :install do
   end
 end
 
-desc('Attempt to uninstall the gem from system gems')
+desc 'Attempt to uninstall the gem from system gems'
 task :uninstall do
   uninstall_gem GEM_SPECIFICATION.name
 rescue Gem::InstallError => e
@@ -55,7 +55,7 @@ def uninstall_gem(name)
   command.execute
 end
 
-desc('Start an interactive prompt for experimentation with the gem')
+desc 'Start an interactive prompt for experimentation with the gem'
 task :console do
   require 'irb'
   require 'kramdown/syntax_tree_sitter'
