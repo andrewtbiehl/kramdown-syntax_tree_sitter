@@ -5,6 +5,8 @@ require 'rake/testtask'
 require 'rubocop/rake_task'
 require 'rubygems/commands/uninstall_command'
 
+Rake::Task[:'install:local'].clear
+
 CONSOLE_HELP = <<~TEXT
   Kramdown and kramdown/syntax_tree_sitter imported.
 
