@@ -4,19 +4,7 @@ require 'bundler/gem_tasks'
 require 'rake/testtask'
 require 'rubocop/rake_task'
 
-CONSOLE_HELP = <<~TEXT
-  Kramdown and kramdown/syntax_tree_sitter imported.
-
-  Try running the following code snippet from the console:
-
-  example_text = <<~MARKDOWN
-    ~~~python
-    print('Hello, World!')
-    ~~~
-  MARKDOWN
-
-  puts Kramdown::Document.new(example_text, syntax_highlighter: :'tree-sitter').to_html
-TEXT
+CONSOLE_EXECUTABLE_FILE = File.expand_path 'console.rb'
 GEM_SPECIFICATION = Gem::Specification.load Dir.glob('*.gemspec').first
 SMOKE_TEST_EXECUTABLE_FILE = File.expand_path 'smoke_test.rb'
 
@@ -54,13 +42,12 @@ rescue Gem::InstallError => e
   puts e
 end
 
-desc 'Start an interactive prompt for experimentation with the gem'
+desc [
+  'Start an interactive prompt for experimentation with the gem (requires prior',
+  'installation)'
+].join(' ')
 task :console do
-  require 'irb'
-  require 'kramdown/syntax_tree_sitter'
-  puts CONSOLE_HELP
-  ARGV.clear
-  IRB.start(__FILE__)
+  Bundler.unbundled_exec CONSOLE_EXECUTABLE_FILE
 end
 
 def install_gem(name)
