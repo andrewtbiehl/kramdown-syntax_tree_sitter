@@ -3,8 +3,8 @@
 require 'bundler/gem_tasks'
 require 'rake/testtask'
 require 'rubocop/rake_task'
-require 'rubygems/commands/uninstall_command'
 
+Rake::Task[:install].clear_actions
 Rake::Task[:'install:local'].clear
 
 CONSOLE_HELP = <<~TEXT
@@ -33,10 +33,14 @@ Rake::TestTask.new(:test) do |task_|
   task_.warning = false
 end
 
+task :install do # rubocop:disable Rake/Desc
+  install_gem Dir.glob('pkg/*.gem').first
+end
+
 desc 'Run a smoke test'
 task smoke_test: :install do
   expected = GEM_SPECIFICATION.version.to_s
-  actual = `#{SMOKE_TEST_EXECUTABLE_FILE}`
+  actual = Bundler.with_unbundled_env { `#{SMOKE_TEST_EXECUTABLE_FILE}` }
   if actual == expected
     puts 'Smoke test passed!'
   else
@@ -60,8 +64,10 @@ task :console do
   IRB.start(__FILE__)
 end
 
+def install_gem(name)
+  Bundler.unbundled_system "gem install #{name}"
+end
+
 def uninstall_gem(name)
-  command = Gem::Commands::UninstallCommand.new
-  command.handle_options ['--ignore-dependencies', name]
-  command.execute
+  Bundler.unbundled_system "gem uninstall #{name}"
 end
