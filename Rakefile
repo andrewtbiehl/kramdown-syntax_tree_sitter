@@ -4,9 +4,6 @@ require 'bundler/gem_tasks'
 require 'rake/testtask'
 require 'rubocop/rake_task'
 
-Rake::Task[:install].clear_actions
-Rake::Task[:'install:local'].clear
-
 CONSOLE_HELP = <<~TEXT
   Kramdown and kramdown/syntax_tree_sitter imported.
 
@@ -23,18 +20,20 @@ TEXT
 GEM_SPECIFICATION = Gem::Specification.load Dir.glob('*.gemspec').first
 SMOKE_TEST_EXECUTABLE_FILE = File.expand_path 'smoke_test.rb'
 
+Rake::Task[:install].clear_actions
+Rake::Task[:'install:local'].clear
+RuboCop::RakeTask.new
+
 task default: %i[rubocop test]
 
-RuboCop::RakeTask.new
+task :install do # rubocop:disable Rake/Desc
+  install_gem Dir.glob('pkg/*.gem').first
+end
 
 Rake::TestTask.new(:test) do |task_|
   task_.pattern = 'test/**/test_*.rb'
   # Used to silence noisy warnings for some dependencies
   task_.warning = false
-end
-
-task :install do # rubocop:disable Rake/Desc
-  install_gem Dir.glob('pkg/*.gem').first
 end
 
 desc 'Run a smoke test'
