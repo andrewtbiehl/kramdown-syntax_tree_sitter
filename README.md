@@ -16,10 +16,14 @@ to highlight code blocks (and spans) when rendering HTML.
 ### Requirements and compatibility
 
 This plugin is built for [Kramdown](https://kramdown.gettalong.org) and hence requires a
-compatible [Ruby](https://www.ruby-lang.org) installation to function. It is officially
-compatible with the following environments:
+compatible [Ruby](https://www.ruby-lang.org) installation to function. It is also
+essentially an adapter for the
+[Tree-sitter highlight library](https://crates.io/crates/tree-sitter-highlight) and
+hence also requires a compatible [Rust](https://www.rust-lang.org) installation to
+function. It is officially compatible with the following environments:
 
 - **Ruby**: 2.7, 3.0, 3.1
+- **Rust**: 1.64
 - **Platforms**: MacOS, Linux
 
 ### Installation

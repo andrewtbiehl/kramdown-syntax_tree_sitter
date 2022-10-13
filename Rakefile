@@ -4,6 +4,8 @@ require 'bundler/gem_tasks'
 require 'rake/testtask'
 require 'rubocop/rake_task'
 
+load 'extensions_tasks.rake'
+
 CONSOLE_EXECUTABLE_FILE = File.expand_path 'console.rb'
 GEM_SPECIFICATION = Gem::Specification.load Dir.glob('*.gemspec').first
 SMOKE_TEST_EXECUTABLE_FILE = File.expand_path 'smoke_test.rb'
@@ -20,6 +22,7 @@ task :install do # rubocop:disable Rake/Desc
   install_gem Dir.glob('pkg/*.gem').first
 end
 
+task test: :'extensions:build' # rubocop:disable Rake/Desc
 Rake::TestTask.new(:test) do |task_|
   task_.pattern = 'test/**/test_*.rb'
   # Used to silence noisy warnings for some dependencies

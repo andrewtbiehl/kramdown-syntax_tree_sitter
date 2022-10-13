@@ -5,12 +5,14 @@ permissions: {}
 on: push
 jobs:
   check:
-    name: Check quality (Ruby ${{matrix.ruby-version}} on ${{matrix.os}})
+    name: Check quality (Ruby ${{matrix.ruby-version}} and Rust ${{matrix.rust-version}}
+      on ${{matrix.os}})
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
         os: [ubuntu-20.04, ubuntu-22.04, macos-11, macos-12]
         ruby-version: ['2.7', '3.0', '3.1']
+        rust-version: ['1.64']
     steps:
       - name: Checkout project
         uses: actions/checkout@v3.1.0
@@ -21,5 +23,9 @@ jobs:
           bundler: 2.3.22
           bundler-cache: true
           cache-version: ${{hashFiles('*.gemspec')}}
+      - name: Install project-compatible Rust
+        run: |
+          rustup install --profile minimal ${{matrix.rust-version}}
+          rustup default ${{matrix.rust-version}}
       - name: Run checks and tests
         run: bundle exec rake rubocop test smoke_test

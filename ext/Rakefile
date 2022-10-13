@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+load File.expand_path(File.join('..', 'extensions_tasks.rake'))
+
+task default: :'extensions:build'
