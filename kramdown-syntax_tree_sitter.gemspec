@@ -22,6 +22,6 @@ Gem::Specification.new do |spec|
 
   DEVELOPMENT_DEPENDENCIES.each { spec.add_development_dependency(*_1) }
 
-  spec.files = Dir['LICENSE.txt', 'README.md', 'extensions_tasks.rake', 'lib/**/*.rb']
+  spec.files = Dir['LICENSE.txt', 'README.md', 'ext/tasks.rake', 'lib/**/*.rb']
   spec.extensions = ['ext/Rakefile']
 end
