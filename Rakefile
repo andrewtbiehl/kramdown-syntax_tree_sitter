@@ -8,6 +8,8 @@ CONSOLE_EXECUTABLE_FILE = File.expand_path 'console.rb'
 GEM_SPECIFICATION = Gem::Specification.load Dir.glob('*.gemspec').first
 SMOKE_TEST_EXECUTABLE_FILE = File.expand_path 'smoke_test.rb'
 
+CLOBBER.include 'Gemfile.lock'
+
 Rake::Task[:install].clear_actions
 Rake::Task[:'install:local'].clear
 RuboCop::RakeTask.new
