@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter'
 
   spec.add_runtime_dependency 'kramdown', '~> 2.0'
+  spec.add_runtime_dependency 'rutie', '~> 0.0.4'
 
   DEVELOPMENT_DEPENDENCIES.each { spec.add_development_dependency(*_1) }
 
