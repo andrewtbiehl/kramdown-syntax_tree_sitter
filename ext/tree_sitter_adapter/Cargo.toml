@@ -3,4 +3,9 @@ name = "tree_sitter_adapter"
 version = "0.0.0"
 edition = "2021"
 
+[lib]
+name = "tree_sitter_adapter"
+crate-type = ["cdylib"]
+
 [dependencies]
+rutie = "*"
