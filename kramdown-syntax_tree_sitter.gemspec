@@ -19,11 +19,8 @@ Gem::Specification.new do |spec|
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 2.7'
   spec.homepage = 'https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter'
-
   RUNTIME_DEPENDENCIES.each { spec.add_runtime_dependency(*_1) }
-
   DEVELOPMENT_DEPENDENCIES.each { spec.add_development_dependency(*_1) }
-
   spec.files = Dir['LICENSE.txt', 'README.md', 'ext/**/*.rs', 'ext/**/Cargo.lock',
                    'ext/**/Cargo.toml', 'ext/tasks.rake', 'lib/**/*.rb']
   spec.extensions = ['ext/Rakefile']
