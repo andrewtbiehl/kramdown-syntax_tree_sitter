@@ -20,7 +20,7 @@ jobs:
         uses: ruby/setup-ruby@v1.118.0
         with:
           ruby-version: ${{matrix.ruby-version}}
-          bundler: 2.3.22
+          bundler: 2.3.23
           bundler-cache: true
           cache-version: ${{hashFiles('*.gemspec')}}
       - name: Install project-compatible Rust
