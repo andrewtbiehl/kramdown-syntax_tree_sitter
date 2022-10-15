@@ -10,6 +10,16 @@ updates:
       - andrewtbiehl
     labels:
       - dependencies
+  - package-ecosystem: cargo
+    directory: /ext/tree_sitter_adapter
+    schedule:
+      interval: daily
+    pull-request-branch-name:
+      separator: "-"
+    reviewers:
+      - andrewtbiehl
+    labels:
+      - dependencies
   - package-ecosystem: github-actions
     directory: /
     schedule:
