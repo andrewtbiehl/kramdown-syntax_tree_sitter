@@ -1,5 +1,15 @@
 version: 2
 updates:
+  - package-ecosystem: bundler
+    directory: /
+    schedule:
+      interval: daily
+    pull-request-branch-name:
+      separator: "-"
+    reviewers:
+      - andrewtbiehl
+    labels:
+      - dependencies
   - package-ecosystem: github-actions
     directory: /
     schedule:
