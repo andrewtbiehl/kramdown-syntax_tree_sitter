@@ -3,6 +3,10 @@ extern crate rutie;
 
 use rutie::{Class, Object, RString};
 
+fn reverse(s: &str) -> String {
+    s.chars().rev().collect()
+}
+
 class!(RutieExample);
 
 methods!(
@@ -11,9 +15,9 @@ methods!(
     fn pub_reverse(raw_input: RString) -> RString {
         let output = {
             let input = raw_input.unwrap().to_string();
-            &input.chars().rev().collect::<String>()
+            reverse(&input)
         };
-        RString::new_utf8(output)
+        RString::new_utf8(&output)
     }
 );
 
