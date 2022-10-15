@@ -27,5 +27,14 @@ jobs:
         run: |
           rustup install --profile minimal ${{matrix.rust-version}}
           rustup default ${{matrix.rust-version}}
+      - name: Restore Rust package Cache
+        uses: actions/cache@v3.0.11
+        with:
+          key: ${{matrix.os}}-${{matrix.rust-version}}-${{hashFiles('**/Cargo.lock')}}
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
       - name: Run checks and tests
         run: bundle exec rake rubocop test smoke_test
