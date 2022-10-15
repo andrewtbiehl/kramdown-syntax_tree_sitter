@@ -22,8 +22,7 @@ task :install do # rubocop:disable Rake/Desc
   install_gem Dir.glob('pkg/*.gem').first
 end
 
-task test: :'extensions:build' # rubocop:disable Rake/Desc
-Rake::TestTask.new(:test) do |task_|
+Rake::TestTask.new(test: :'extensions:build') do |task_|
   task_.pattern = 'test/**/test_*.rb'
   # Used to silence noisy warnings for some dependencies
   task_.warning = false
