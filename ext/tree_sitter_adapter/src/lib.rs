@@ -7,10 +7,10 @@ fn reverse(s: &str) -> String {
     s.chars().rev().collect()
 }
 
-class!(RutieExample);
+class!(TreeSitterAdapter);
 
 methods!(
-    RutieExample,
+    TreeSitterAdapter,
     _rtself,
     fn pub_reverse(raw_text: RString) -> RString {
         RString::new_utf8(&reverse(&raw_text.unwrap().to_string()))
@@ -18,8 +18,8 @@ methods!(
 );
 
 #[no_mangle]
-pub extern "C" fn Init_rutie_ruby_example() {
-    Class::new("RutieExample", None).define(|class_| {
+pub extern "C" fn Init_tree_sitter_adapter() {
+    Class::new("TreeSitterAdapter", None).define(|class_| {
         class_.def_self("reverse", pub_reverse);
     });
 }
