@@ -20,7 +20,9 @@ PYTHON_NO_HIGHLIGHT_HTML = <<~HTML
 HTML
 
 PYTHON_ROUGE_HTML = <<~HTML
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'Hello, World!'</span><span class="p">)</span>
+  <div class="language-python highlighter-rouge"><div class="highlight">\
+  <pre class="highlight"><code><span class="k">print</span><span class="p">(</span>\
+  <span class="s">'Hello, World!'</span><span class="p">)</span>
   </code></pre></div></div>
 HTML
 
@@ -30,7 +32,8 @@ PYTHON_TREE_SITTER_HTML = <<~HTML
 HTML
 
 PYTHON_TREE_SITTER_INLINE_HTML = <<~HTML
-  <p>The code <code class="language-python highlighter-tree-sitter">print('Hello, World!')</code> is valid Python.</p>
+  <p>The code <code class="language-python highlighter-tree-sitter">\
+  print('Hello, World!')</code> is valid Python.</p>
 HTML
 
 MARKDOWN_HIGHLIGHTER_HTML_COMBINATIONS = [
