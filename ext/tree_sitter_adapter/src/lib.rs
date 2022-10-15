@@ -12,19 +12,19 @@ class!(RutieExample);
 methods!(
     RutieExample,
     _rtself,
-    fn pub_reverse(raw_input: RString) -> RString {
-        let output = {
-            let input = raw_input.unwrap().to_string();
-            reverse(&input)
+    fn pub_reverse(raw_text: RString) -> RString {
+        let reversed = {
+            let text = raw_text.unwrap().to_string();
+            reverse(&text)
         };
-        RString::new_utf8(&output)
+        RString::new_utf8(&reversed)
     }
 );
 
 #[allow(non_snake_case)]
 #[no_mangle]
 pub extern "C" fn Init_rutie_ruby_example() {
-    Class::new("RutieExample", None).define(|klass| {
-        klass.def_self("reverse", pub_reverse);
+    Class::new("RutieExample", None).define(|class_| {
+        class_.def_self("reverse", pub_reverse);
     });
 }
