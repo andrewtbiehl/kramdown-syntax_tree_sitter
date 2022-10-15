@@ -10,6 +10,12 @@ PYTHON_MARKDOWN = <<~MARKDOWN
   ~~~
 MARKDOWN
 
+HTML_MARKDOWN = <<~MARKDOWN
+  ~~~html
+  <strong>The ampersand ('&amp;') should be HTML escaped.</strong>
+  ~~~
+MARKDOWN
+
 PYTHON_INLINE_MARKDOWN = <<~MARKDOWN
   The code `print('Hello, World!')`{: .language-python} is valid Python.
 MARKDOWN
@@ -34,6 +40,12 @@ HTML
 PYTHON_TREE_SITTER_INLINE_HTML = <<~HTML
   <p>The code <code class="language-python highlighter-tree-sitter">\
   print('Hello, World!')</code> is valid Python.</p>
+HTML
+
+HTML_TREE_SITTER_HTML = <<~HTML
+  <div class=\"language-html highlighter-tree-sitter\"><pre><code>\
+  &lt;strong&gt;The ampersand ('&amp;amp;') should be HTML escaped.&lt;/strong&gt;
+  </code></pre></div>
 HTML
 
 MARKDOWN_HIGHLIGHTER_HTML_COMBINATIONS = [
@@ -65,6 +77,11 @@ module Kramdown
     def test_that_it_can_use_tree_sitter_inline_highlighting
       actual = convert_to_html PYTHON_INLINE_MARKDOWN, :'tree-sitter'
       assert_equal actual, PYTHON_TREE_SITTER_INLINE_HTML
+    end
+
+    def test_that_it_can_use_tree_sitter_html_escaped_highlighting
+      actual = convert_to_html HTML_MARKDOWN, :'tree-sitter'
+      assert_equal actual, HTML_TREE_SITTER_HTML
     end
   end
 end
