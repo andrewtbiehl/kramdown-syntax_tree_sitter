@@ -13,11 +13,7 @@ methods!(
     RutieExample,
     _rtself,
     fn pub_reverse(raw_text: RString) -> RString {
-        let reversed = {
-            let text = raw_text.unwrap().to_string();
-            reverse(&text)
-        };
-        RString::new_utf8(&reversed)
+        RString::new_utf8(&reverse(&raw_text.unwrap().to_string()))
     }
 );
 
