@@ -43,7 +43,7 @@ PYTHON_TREE_SITTER_INLINE_HTML = <<~HTML
 HTML
 
 HTML_TREE_SITTER_HTML = <<~HTML
-  <div class=\"language-html highlighter-tree-sitter\"><pre><code>\
+  <div class="language-html highlighter-tree-sitter"><pre><code>\
   &lt;strong&gt;The ampersand ('&amp;amp;') should be HTML escaped.&lt;/strong&gt;
   </code></pre></div>
 HTML
