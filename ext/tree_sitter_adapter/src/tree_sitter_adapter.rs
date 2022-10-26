@@ -2,16 +2,14 @@
 //
 // Not intended for use on other HTML content, such as attribute content.
 fn escape_text_html(text: &str) -> String {
-    let mut escaped_text = String::new();
-    for c in text.chars() {
-        match c {
-            '&' => escaped_text.push_str("&amp;"),
-            '<' => escaped_text.push_str("&lt;"),
-            '>' => escaped_text.push_str("&gt;"),
-            _ => escaped_text.push(c),
-        }
-    }
-    escaped_text
+    text.chars()
+        .map(|c| match c {
+            '&' => "&amp;".to_string(),
+            '<' => "&lt;".to_string(),
+            '>' => "&gt;".to_string(),
+            _ => c.to_string(),
+        })
+        .collect()
 }
 
 pub fn highlight(code: &str) -> String {
