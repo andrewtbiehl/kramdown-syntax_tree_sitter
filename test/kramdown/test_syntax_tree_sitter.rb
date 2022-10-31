@@ -71,20 +71,20 @@ module Kramdown
       define_method "test_that_it_can_use_#{highlighter_name}_highlighting" do
         actual = convert_to_html markdown, highlighter
 
-        assert_equal actual, expected
+        assert_equal expected, actual
       end
     end
 
     def test_that_it_can_use_tree_sitter_inline_highlighting
       actual = convert_to_html PYTHON_INLINE_MARKDOWN, :'tree-sitter'
 
-      assert_equal actual, PYTHON_TREE_SITTER_INLINE_HTML
+      assert_equal PYTHON_TREE_SITTER_INLINE_HTML, actual
     end
 
     def test_that_it_can_use_tree_sitter_html_escaped_highlighting
       actual = convert_to_html HTML_MARKDOWN, :'tree-sitter'
 
-      assert_equal actual, HTML_TREE_SITTER_HTML
+      assert_equal HTML_TREE_SITTER_HTML, actual
     end
   end
 end
