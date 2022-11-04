@@ -19,7 +19,7 @@ module Kramdown
                         DEFAULT_PARSERS_DIR
           raise format(MISSING_DIR_MSG, dir: parsers_dir) unless Dir.exist? parsers_dir
 
-          rendered_text = TreeSitterAdapter.highlight raw_text
+          rendered_text = TreeSitterAdapter.highlight raw_text, parsers_dir
           # Code blocks are additionally wrapped in HTML code tags
           type == :block ? "<pre><code>#{rendered_text}</code></pre>" : rendered_text
         end

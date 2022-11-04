@@ -10,9 +10,10 @@ class!(TreeSitterAdapter);
 methods!(
     TreeSitterAdapter,
     _rtself,
-    fn pub_highlight(raw_code: RString) -> RString {
+    fn pub_highlight(raw_code: RString, raw_parsers_dir: RString) -> RString {
         RString::new_utf8(&tree_sitter_adapter::highlight(
             &raw_code.unwrap().to_string(),
+            &raw_parsers_dir.unwrap().to_string(),
         ))
     }
 );

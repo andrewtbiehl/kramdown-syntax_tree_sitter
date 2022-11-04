@@ -17,6 +17,6 @@ fn escape_text_html(text: &str) -> String {
     text.chars().map(html_text_escape).collect()
 }
 
-pub fn highlight(code: &str) -> String {
+pub fn highlight(code: &str, _parsers_dir: &str) -> String {
     escape_text_html(code)
 }
