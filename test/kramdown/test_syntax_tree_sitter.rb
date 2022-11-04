@@ -50,8 +50,12 @@ HTML
 
 # Helper function for invoking Kramdown to render Markdown into HTML using a
 # specific syntax highlighter.
-def convert_to_html(markdown, highlighter)
-  Kramdown::Document.new(markdown, syntax_highlighter: highlighter).to_html
+def convert_to_html(markdown, highlighter, highlighter_opts = {})
+  Kramdown::Document.new(
+    markdown,
+    syntax_highlighter: highlighter,
+    syntax_highlighter_opts: highlighter_opts
+  ).to_html
 end
 
 module Kramdown
