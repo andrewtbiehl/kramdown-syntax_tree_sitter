@@ -48,12 +48,6 @@ HTML_TREE_SITTER_HTML = <<~HTML
   </code></pre></div>
 HTML
 
-MARKDOWN_HIGHLIGHTER_HTML_COMBINATIONS = [
-  [PYTHON_MARKDOWN, nil, PYTHON_NO_HIGHLIGHT_HTML],
-  [PYTHON_MARKDOWN, :rouge, PYTHON_ROUGE_HTML],
-  [PYTHON_MARKDOWN, :'tree-sitter', PYTHON_TREE_SITTER_HTML]
-].freeze
-
 # Helper function for invoking Kramdown to render Markdown into HTML using a
 # specific syntax highlighter.
 def convert_to_html(markdown, highlighter)
@@ -66,13 +60,22 @@ module Kramdown
       refute_nil Converter::SyntaxHighlighter::TreeSitter::VERSION
     end
 
-    MARKDOWN_HIGHLIGHTER_HTML_COMBINATIONS.each do |markdown, highlighter, expected|
-      highlighter_name = highlighter.nil? ? 'no' : highlighter
-      define_method "test_that_it_can_use_#{highlighter_name}_highlighting" do
-        actual = convert_to_html markdown, highlighter
+    def test_that_it_can_use_no_highlighting
+      actual = convert_to_html PYTHON_MARKDOWN, nil
 
-        assert_equal expected, actual
-      end
+      assert_equal PYTHON_NO_HIGHLIGHT_HTML, actual
+    end
+
+    def test_that_it_can_use_rouge_highlighting
+      actual = convert_to_html PYTHON_MARKDOWN, :rouge
+
+      assert_equal PYTHON_ROUGE_HTML, actual
+    end
+
+    def test_that_it_can_use_tree_sitter_highlighting
+      actual = convert_to_html PYTHON_MARKDOWN, :'tree-sitter'
+
+      assert_equal PYTHON_TREE_SITTER_HTML, actual
     end
 
     def test_that_it_can_use_tree_sitter_inline_highlighting
