@@ -48,6 +48,10 @@ HTML_TREE_SITTER_HTML = <<~HTML
   </code></pre></div>
 HTML
 
+TEST_DIR_PATH = File.expand_path File.join(__dir__, '..')
+REAL_PARSERS_PATH = File.join TEST_DIR_PATH, 'tree_sitter_parsers'
+FAKE_PARSERS_PATH = File.join TEST_DIR_PATH, 'tree_sitter_parsers_fake'
+
 # Helper function for invoking Kramdown to render Markdown into HTML using a
 # specific syntax highlighter.
 def convert_to_html(markdown, highlighter, highlighter_opts = {})
@@ -77,21 +81,46 @@ module Kramdown
     end
 
     def test_that_it_can_use_tree_sitter_highlighting
-      actual = convert_to_html PYTHON_MARKDOWN, :'tree-sitter'
+      actual = convert_to_html(
+        PYTHON_MARKDOWN,
+        :'tree-sitter',
+        { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
+      )
 
       assert_equal PYTHON_TREE_SITTER_HTML, actual
     end
 
     def test_that_it_can_use_tree_sitter_inline_highlighting
-      actual = convert_to_html PYTHON_INLINE_MARKDOWN, :'tree-sitter'
+      actual = convert_to_html(
+        PYTHON_INLINE_MARKDOWN,
+        :'tree-sitter',
+        { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
+      )
 
       assert_equal PYTHON_TREE_SITTER_INLINE_HTML, actual
     end
 
     def test_that_it_can_use_tree_sitter_html_escaped_highlighting
-      actual = convert_to_html HTML_MARKDOWN, :'tree-sitter'
+      actual = convert_to_html(
+        HTML_MARKDOWN,
+        :'tree-sitter',
+        { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
+      )
 
       assert_equal HTML_TREE_SITTER_HTML, actual
+    end
+
+    def test_that_it_fails_gracefully_if_unable_to_locate_tree_sitter_parsers_directory
+      actual = assert_raises Exception do
+        convert_to_html(
+          PYTHON_MARKDOWN,
+          :'tree-sitter',
+          { tree_sitter_parsers_dir: FAKE_PARSERS_PATH }
+        )
+      end
+
+      assert_instance_of RuntimeError, actual
+      assert_match(/^Error locating Tree-sitter parsers directory/, actual.message)
     end
   end
 end

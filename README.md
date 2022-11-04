@@ -49,6 +49,9 @@ plugin is incomplete and subject to change significantly.
 
 ### Quickstart
 
+For the following example to function, a directory called `tree_sitter_parsers` must be
+present in the home directory.
+
 ```ruby
 require 'kramdown'
 require 'kramdown/syntax_tree_sitter'
@@ -58,7 +61,12 @@ Kramdown::Document.new(text, syntax_highlighter: :'tree-sitter').to_html
 
 ### Configuration
 
-This Kramdown plugin does not currently support any configuration options.
+This Kramdown plugin currently supports the following options when provided as sub-keys
+of the Kramdown option `syntax_highlighter_opts`:
+
+| Key | Description | Default value |
+| :-- | :-- | :-- |
+| `tree_sitter_parsers_dir` | The path to the Tree-sitter language parsers directory. | `~/tree_sitter_parsers` |
 
 ## Contributing
 

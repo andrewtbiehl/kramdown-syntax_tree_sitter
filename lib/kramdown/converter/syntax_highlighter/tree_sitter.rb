@@ -11,10 +11,21 @@ module Kramdown
       # Currently it merely escapes the code so that it can be safely inserted into HTML
       # text.
       module TreeSitter
-        def self.call(_, raw_text, _, type, _)
+        MISSING_DIR_MSG = 'Error locating Tree-sitter parsers directory: %<dir>s'
+        DEFAULT_PARSERS_DIR = File.expand_path '~/tree_sitter_parsers'
+
+        def self.call(converter, raw_text, _, type, _)
+          parsers_dir = get_option(converter, :tree_sitter_parsers_dir) ||
+                        DEFAULT_PARSERS_DIR
+          raise format(MISSING_DIR_MSG, dir: parsers_dir) unless Dir.exist? parsers_dir
+
           rendered_text = TreeSitterAdapter.highlight raw_text
           # Code blocks are additionally wrapped in HTML code tags
           type == :block ? "<pre><code>#{rendered_text}</code></pre>" : rendered_text
+        end
+
+        def self.get_option(converter, name)
+          converter.options[:syntax_highlighter_opts][name]
         end
       end
     end
