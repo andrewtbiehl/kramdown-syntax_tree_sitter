@@ -4,20 +4,26 @@ require 'kramdown'
 require 'kramdown/syntax_tree_sitter'
 require 'minitest/autorun'
 
-PYTHON_MARKDOWN = <<~MARKDOWN
+PYTHON_STANDARD_MARKDOWN = <<~MARKDOWN
   ~~~python
   print('Hello, World!')
   ~~~
 MARKDOWN
 
-HTML_MARKDOWN = <<~MARKDOWN
-  ~~~html
+PYTHON_TREE_SITTER_MARKDOWN = <<~MARKDOWN
+  ~~~source.python
+  print('Hello, World!')
+  ~~~
+MARKDOWN
+
+HTML_TREE_SITTER_MARKDOWN = <<~MARKDOWN
+  ~~~text.html.basic
   <strong>The ampersand ('&amp;') should be HTML escaped.</strong>
   ~~~
 MARKDOWN
 
-PYTHON_INLINE_MARKDOWN = <<~MARKDOWN
-  The code `print('Hello, World!')`{: .language-python} is valid Python.
+PYTHON_TREE_SITTER_INLINE_MARKDOWN = <<~MARKDOWN
+  The code `print('Hello, World!')`{: class="language-source.python" } is valid Python.
 MARKDOWN
 
 PYTHON_NO_HIGHLIGHT_HTML = <<~HTML
@@ -33,17 +39,18 @@ PYTHON_ROUGE_HTML = <<~HTML
 HTML
 
 PYTHON_TREE_SITTER_HTML = <<~HTML
-  <div class="language-python highlighter-tree-sitter"><pre><code>print('Hello, World!')
+  <div class="language-source.python highlighter-tree-sitter">\
+  <pre><code>print('Hello, World!')
   </code></pre></div>
 HTML
 
 PYTHON_TREE_SITTER_INLINE_HTML = <<~HTML
-  <p>The code <code class="language-python highlighter-tree-sitter">\
+  <p>The code <code class="language-source.python highlighter-tree-sitter">\
   print('Hello, World!')</code> is valid Python.</p>
 HTML
 
 HTML_TREE_SITTER_HTML = <<~HTML
-  <div class="language-html highlighter-tree-sitter"><pre><code>\
+  <div class="language-text.html.basic highlighter-tree-sitter"><pre><code>\
   &lt;strong&gt;The ampersand ('&amp;amp;') should be HTML escaped.&lt;/strong&gt;
   </code></pre></div>
 HTML
@@ -69,20 +76,20 @@ module Kramdown
     end
 
     def test_that_it_can_use_no_highlighting
-      actual = convert_to_html PYTHON_MARKDOWN, nil
+      actual = convert_to_html PYTHON_STANDARD_MARKDOWN, nil
 
       assert_equal PYTHON_NO_HIGHLIGHT_HTML, actual
     end
 
     def test_that_it_can_use_rouge_highlighting
-      actual = convert_to_html PYTHON_MARKDOWN, :rouge
+      actual = convert_to_html PYTHON_STANDARD_MARKDOWN, :rouge
 
       assert_equal PYTHON_ROUGE_HTML, actual
     end
 
     def test_that_it_can_use_tree_sitter_highlighting
       actual = convert_to_html(
-        PYTHON_MARKDOWN,
+        PYTHON_TREE_SITTER_MARKDOWN,
         :'tree-sitter',
         { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
       )
@@ -92,7 +99,7 @@ module Kramdown
 
     def test_that_it_can_use_tree_sitter_inline_highlighting
       actual = convert_to_html(
-        PYTHON_INLINE_MARKDOWN,
+        PYTHON_TREE_SITTER_INLINE_MARKDOWN,
         :'tree-sitter',
         { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
       )
@@ -102,7 +109,7 @@ module Kramdown
 
     def test_that_it_can_use_tree_sitter_html_escaped_highlighting
       actual = convert_to_html(
-        HTML_MARKDOWN,
+        HTML_TREE_SITTER_MARKDOWN,
         :'tree-sitter',
         { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
       )
@@ -113,7 +120,7 @@ module Kramdown
     def test_that_it_fails_gracefully_if_unable_to_locate_tree_sitter_parsers_directory
       actual = assert_raises Exception do
         convert_to_html(
-          PYTHON_MARKDOWN,
+          PYTHON_TREE_SITTER_MARKDOWN,
           :'tree-sitter',
           { tree_sitter_parsers_dir: FAKE_PARSERS_PATH }
         )
