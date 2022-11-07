@@ -79,6 +79,14 @@ To set up a compatible local development environment, please first refer to the
 ['Requirements and Compatibility'](#requirements-and-compatibility) section of this
 document.
 
+This project also depends on Git submodules to run some of its tests. Accordingly, make
+sure to initialize recursive submodules when cloning the project for development
+purposes, for example with the following command:
+
+```shell
+git clone --recurse-submodules https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter.git
+```
+
 After checking out the project, run `bundle install` from within it to install
 dependencies. Then run `bundle exec rake --tasks` to list all available Rake tasks. Each
 task can be invoked via `bundle exec rake <task name>`. For example,

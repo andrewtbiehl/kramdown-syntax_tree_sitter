@@ -1,0 +1,6 @@
+[submodule "test/tree_sitter_parsers/tree-sitter-python"]
+	path = test/tree_sitter_parsers/tree-sitter-python
+	url = https://github.com/tree-sitter/tree-sitter-python.git
+[submodule "test/tree_sitter_parsers/tree-sitter-html"]
+	path = test/tree_sitter_parsers/tree-sitter-html
+	url = https://github.com/tree-sitter/tree-sitter-html.git

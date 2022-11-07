@@ -15,6 +15,8 @@ jobs:
         rust-version: ['1.60', '1.61', '1.62', '1.63', '1.64']
     steps:
       - name: Checkout project
+        with:
+          submodules: recursive
         uses: actions/checkout@v3.1.0
       - name: Install project-compatible Ruby
         uses: ruby/setup-ruby@v1.120.0
