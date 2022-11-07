@@ -49,15 +49,47 @@ plugin is incomplete and subject to change significantly.
 
 ### Quickstart
 
-For the following example to function, a directory called `tree_sitter_parsers` must be
-present in the home directory.
+For the following example to function, the
+[Tree-sitter Python parser library](https://github.com/tree-sitter/tree-sitter-python)
+must be present inside a directory called `tree_sitter_parsers`, which in turn must be
+located in the home directory.
 
 ```ruby
 require 'kramdown'
 require 'kramdown/syntax_tree_sitter'
 
+text = <<~MARKDOWN
+  ~~~source.python
+  print('Hello, World!')
+  ~~~
+MARKDOWN
+
 Kramdown::Document.new(text, syntax_highlighter: :'tree-sitter').to_html
 ```
+
+### Tree-sitter parsers
+
+Tree-sitter relies on external parser libraries to understand each language grammar.
+Thus, in order to syntax highlight a given language using this plugin, that language's
+Tree-sitter parser library must be installed to the correct directory on your machine.
+This directory is set as `~/tree_sitter_parsers` by default but is also configurable (see
+the [Configuration](#configuration) section for details).
+
+For most such parser libraries, installation simply amounts to downloading the
+repository into the configured Tree-sitter parsers directory.
+
+A partial list of languages for which Tree-sitter parser libraries have been developed
+can be found on
+[the official Tree-sitter website](https://tree-sitter.github.io/tree-sitter/#available-parsers).
+
+### Language identifiers
+
+Tree-sitter uses a string-based identifier called a 'scope' to identify each language.
+For example, the scope string for Python is 'source.python', whereas for HTML it is
+'text.html.basic'. Currently, this plugin follows this same convention, so a given code
+block will only be correctly highlighted if the language identifier provided for that
+code block is its language's corresponding Tree-sitter scope string. This is illustrated
+by the code block used in the [Quickstart](#quickstart) example.
 
 ### Configuration
 

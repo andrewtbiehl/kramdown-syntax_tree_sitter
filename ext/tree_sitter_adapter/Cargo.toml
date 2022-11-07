@@ -8,4 +8,7 @@ name = "tree_sitter_adapter"
 crate-type = ["cdylib"]
 
 [dependencies]
+anyhow = "*"
+tree-sitter = "*"
+tree-sitter-loader = "*"
 rutie = "*"

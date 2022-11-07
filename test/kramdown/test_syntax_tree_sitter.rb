@@ -55,6 +55,9 @@ HTML_TREE_SITTER_HTML = <<~HTML
   </code></pre></div>
 HTML
 
+PYTHON_MISSING_LANGUAGE_PARSER_MSG = 'Error retrieving language configuration for ' \
+                                     "scope 'source.python': Language not found"
+
 TEST_DIR_PATH = File.expand_path File.join(__dir__, '..')
 REAL_PARSERS_PATH = File.join TEST_DIR_PATH, 'tree_sitter_parsers'
 FAKE_PARSERS_PATH = File.join TEST_DIR_PATH, 'tree_sitter_parsers_fake'
@@ -127,7 +130,7 @@ module Kramdown
       end
 
       assert_instance_of RuntimeError, actual
-      assert_match(/^Error locating Tree-sitter parsers directory/, actual.message)
+      assert_equal PYTHON_MISSING_LANGUAGE_PARSER_MSG, actual.message
     end
   end
 end
