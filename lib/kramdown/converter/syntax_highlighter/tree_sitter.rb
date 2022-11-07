@@ -13,10 +13,10 @@ module Kramdown
       module TreeSitter
         DEFAULT_PARSERS_DIR = File.expand_path '~/tree_sitter_parsers'
 
-        def self.call(converter, raw_text, _, type, _)
+        def self.call(converter, raw_text, language, type, _)
           parsers_dir = get_option(converter, :tree_sitter_parsers_dir) ||
                         DEFAULT_PARSERS_DIR
-          rendered_text = TreeSitterAdapter.highlight raw_text, parsers_dir
+          rendered_text = TreeSitterAdapter.highlight raw_text, parsers_dir, language
           # Code blocks are additionally wrapped in HTML code tags
           type == :block ? "<pre><code>#{rendered_text}</code></pre>" : rendered_text
         end

@@ -10,11 +10,12 @@ class!(TreeSitterAdapter);
 methods!(
     TreeSitterAdapter,
     _rtself,
-    fn pub_highlight(raw_code: RString, raw_parsers_dir: RString) -> RString {
+    fn pub_highlight(raw_code: RString, raw_parsers_dir: RString, raw_scope: RString) -> RString {
         VM::unwrap_or_raise_ex(
             tree_sitter_adapter::highlight(
                 &raw_code.unwrap().to_string(),
                 &raw_parsers_dir.unwrap().to_string(),
+                &raw_scope.unwrap().to_string(),
             )
             .as_ref()
             .map(String::as_str)

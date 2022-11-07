@@ -21,7 +21,7 @@ fn escape_text_html(text: &str) -> String {
     text.chars().map(html_text_escape).collect()
 }
 
-pub fn highlight(code: &str, parsers_dir: &str) -> Result<String, String> {
+pub fn highlight(code: &str, parsers_dir: &str, _scope: &str) -> Result<String, String> {
     match PathBuf::from(parsers_dir).is_dir() {
         true => Ok(escape_text_html(code)),
         false => Err(format!("{MISSING_DIR_MSG}: {parsers_dir}")),
