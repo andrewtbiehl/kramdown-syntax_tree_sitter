@@ -146,6 +146,14 @@ This article explains the original use case and inspiration for the project, wal
 through its implementation, and even provides some fun examples of syntax highlighting
 with Tree-sitter.
 
+### Disclaimer
+
+Neither this plugin nor its author are affiliated with Tree-sitter or
+Kramdown in any way. For any information particular to
+[Tree-sitter](https://tree-sitter.github.io/tree-sitter) or
+[Kramdown](https://kramdown.gettalong.org), please refer to their respective
+documentation directly.
+
 ## License
 
 This project is released under the MIT License.
