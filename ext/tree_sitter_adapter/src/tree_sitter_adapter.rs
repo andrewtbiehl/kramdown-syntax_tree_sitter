@@ -88,10 +88,7 @@ trait OptionExt<E> {
 
 impl<E> OptionExt<E> for Option<E> {
     fn err_or_else<T, F: FnOnce() -> T>(self, ok: F) -> Result<T, E> {
-        match self {
-            None => Ok(ok()),
-            Some(e) => Err(e),
-        }
+        self.map_or_else(|| Ok(ok()), |e| Err(e))
     }
 }
 
