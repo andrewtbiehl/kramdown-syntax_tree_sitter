@@ -32,6 +32,17 @@ BAD_SYNTAX_PYTHON_TREE_SITTER_MARKDOWN = <<~MARKDOWN
   ~~~
 MARKDOWN
 
+NO_LANGUAGE_TREE_SITTER_MARKDOWN = <<~MARKDOWN
+  ~~~
+  <strong>The ampersand ('&amp;') should be HTML escaped.</strong>
+  ~~~
+MARKDOWN
+
+NO_LANGUAGE_TREE_SITTER_INLINE_MARKDOWN = <<~MARKDOWN
+  The code `<strong>The ampersand ('&amp;') should be HTML escaped.</strong>` is not \
+  highlighted.
+MARKDOWN
+
 PYTHON_NO_HIGHLIGHT_HTML = <<~HTML
   <pre><code class="language-python">print('Hello, World!')
   </code></pre>
@@ -72,6 +83,17 @@ BAD_SYNTAX_PYTHON_TREE_SITTER_HTML = <<~HTML
   <span style='font-weight: bold;color: #005fd7'>print</span>(\
   <span style='color: #008700'>&#39;Hello, World!&#39;</span>&#39;&quot;))
   </code></pre></div>
+HTML
+
+NO_LANGUAGE_TREE_SITTER_HTML = <<~HTML
+  <pre><code>&lt;strong&gt;The ampersand ('&amp;amp;') should be HTML \
+  escaped.&lt;/strong&gt;
+  </code></pre>
+HTML
+
+NO_LANGUAGE_TREE_SITTER_INLINE_HTML = <<~HTML
+  <p>The code <code>&lt;strong&gt;The ampersand ('&amp;amp;') should be HTML \
+  escaped.&lt;/strong&gt;</code> is not highlighted.</p>
 HTML
 
 PYTHON_MISSING_LANGUAGE_PARSER_MSG = 'Error retrieving language configuration for ' \
@@ -147,6 +169,26 @@ module Kramdown
       )
 
       assert_equal BAD_SYNTAX_PYTHON_TREE_SITTER_HTML, actual
+    end
+
+    def test_that_it_can_use_no_highlighting_with_tree_sitter_enabled
+      actual = convert_to_html(
+        NO_LANGUAGE_TREE_SITTER_MARKDOWN,
+        :'tree-sitter',
+        { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
+      )
+
+      assert_equal NO_LANGUAGE_TREE_SITTER_HTML, actual
+    end
+
+    def test_that_it_can_use_no_inline_highlighting_with_tree_sitter_enabled
+      actual = convert_to_html(
+        NO_LANGUAGE_TREE_SITTER_INLINE_MARKDOWN,
+        :'tree-sitter',
+        { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
+      )
+
+      assert_equal NO_LANGUAGE_TREE_SITTER_INLINE_HTML, actual
     end
 
     def test_that_it_fails_gracefully_if_unable_to_locate_tree_sitter_parsers_directory

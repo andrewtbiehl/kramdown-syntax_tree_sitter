@@ -14,6 +14,8 @@ module Kramdown
         DEFAULT_PARSERS_DIR = '~/tree_sitter_parsers'
 
         def self.call(converter, raw_text, language, type, _)
+          return nil unless language
+
           parsers_dir = get_option(converter, :tree_sitter_parsers_dir)
                         .then { _1 || DEFAULT_PARSERS_DIR }
                         .then { File.expand_path _1 }
