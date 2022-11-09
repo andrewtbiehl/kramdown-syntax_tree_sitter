@@ -3,9 +3,9 @@
 require_relative 'lib/kramdown/syntax_tree_sitter/version'
 
 RUNTIME_DEPENDENCIES = [['kramdown', '~> 2.0'],
+                        ['rake', '~> 13.0'],
                         ['rutie', '~> 0.0.4']].freeze
 DEVELOPMENT_DEPENDENCIES = [['minitest', '~> 5.0'],
-                            ['rake', '~> 13.0'],
                             ['rouge', '~> 4.0'],
                             ['rubocop', '~> 1.36'],
                             ['rubocop-minitest', '~> 0.22'],
