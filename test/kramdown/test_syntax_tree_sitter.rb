@@ -26,6 +26,12 @@ PYTHON_TREE_SITTER_INLINE_MARKDOWN = <<~MARKDOWN
   The code `print('Hello, World!')`{: class="language-source.python" } is valid Python.
 MARKDOWN
 
+BAD_SYNTAX_PYTHON_TREE_SITTER_MARKDOWN = <<~MARKDOWN
+  ~~~source.python
+  print('Hello, World!''"))
+  ~~~
+MARKDOWN
+
 PYTHON_NO_HIGHLIGHT_HTML = <<~HTML
   <pre><code class="language-python">print('Hello, World!')
   </code></pre>
@@ -52,6 +58,12 @@ HTML
 HTML_TREE_SITTER_HTML = <<~HTML
   <div class="language-text.html.basic highlighter-tree-sitter"><pre><code>\
   &lt;strong&gt;The ampersand ('&amp;amp;') should be HTML escaped.&lt;/strong&gt;
+  </code></pre></div>
+HTML
+
+BAD_SYNTAX_PYTHON_TREE_SITTER_HTML = <<~HTML
+  <div class="language-source.python highlighter-tree-sitter">\
+  <pre><code>print('Hello, World!''"))
   </code></pre></div>
 HTML
 
@@ -118,6 +130,16 @@ module Kramdown
       )
 
       assert_equal HTML_TREE_SITTER_HTML, actual
+    end
+
+    def test_that_it_can_use_tree_sitter_highlighting_on_bad_syntax
+      actual = convert_to_html(
+        BAD_SYNTAX_PYTHON_TREE_SITTER_MARKDOWN,
+        :'tree-sitter',
+        { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
+      )
+
+      assert_equal BAD_SYNTAX_PYTHON_TREE_SITTER_HTML, actual
     end
 
     def test_that_it_fails_gracefully_if_unable_to_locate_tree_sitter_parsers_directory
