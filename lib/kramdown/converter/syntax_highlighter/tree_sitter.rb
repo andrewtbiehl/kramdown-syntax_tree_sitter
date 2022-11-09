@@ -11,11 +11,12 @@ module Kramdown
       # Currently it merely escapes the code so that it can be safely inserted into HTML
       # text.
       module TreeSitter
-        DEFAULT_PARSERS_DIR = File.expand_path '~/tree_sitter_parsers'
+        DEFAULT_PARSERS_DIR = '~/tree_sitter_parsers'
 
         def self.call(converter, raw_text, language, type, _)
-          parsers_dir = get_option(converter, :tree_sitter_parsers_dir) ||
-                        DEFAULT_PARSERS_DIR
+          parsers_dir = get_option(converter, :tree_sitter_parsers_dir)
+                        .then { _1 || DEFAULT_PARSERS_DIR }
+                        .then { File.expand_path _1 }
           rendered_text = TreeSitterAdapter.highlight raw_text, parsers_dir, language
           # Code blocks are additionally wrapped in HTML code tags
           type == :block ? "<pre><code>#{rendered_text}</code></pre>" : rendered_text
