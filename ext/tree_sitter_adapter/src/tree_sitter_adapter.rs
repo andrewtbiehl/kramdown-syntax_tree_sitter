@@ -10,26 +10,6 @@ use tree_sitter_loader::{Config, LanguageConfiguration, Loader};
 const LOADER_ERROR_MSG: &str = "Error loading Tree-sitter parsers from directory";
 const NO_LANGUAGE_ERROR_MSG: &str = "Error retrieving language configuration for scope";
 
-// Escape a single character for HTML text.
-//
-// Not intended for use on other HTML content, such as attribute content.
-fn html_text_escape(c: char) -> String {
-    match c {
-        '&' => "&amp;".to_string(),
-        '<' => "&lt;".to_string(),
-        '>' => "&gt;".to_string(),
-        _ => c.to_string(),
-    }
-}
-
-// Escapes HTML text content.
-//
-// Not intended for use on other HTML content, such as attribute content.
-#[allow(dead_code)]
-fn escape_text_html(text: &str) -> String {
-    text.chars().map(html_text_escape).collect()
-}
-
 pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, String> {
     let parsers_dir = PathBuf::from(parsers_dir);
     let theme = Theme::default();
@@ -167,16 +147,6 @@ fn get_css_styles<'a>(
             .and_then(|style| style.css.as_ref())
             .unwrap_or(default_css_style)
             .as_bytes()
-    }
-}
-
-trait OptionExt<E> {
-    fn err_or_else<T, F: FnOnce() -> T>(self, ok: F) -> Result<T, E>;
-}
-
-impl<E> OptionExt<E> for Option<E> {
-    fn err_or_else<T, F: FnOnce() -> T>(self, ok: F) -> Result<T, E> {
-        self.map_or_else(|| Ok(ok()), |e| Err(e))
     }
 }
 
