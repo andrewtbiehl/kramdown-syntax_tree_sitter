@@ -45,25 +45,32 @@ PYTHON_ROUGE_HTML = <<~HTML
 HTML
 
 PYTHON_TREE_SITTER_HTML = <<~HTML
-  <div class="language-source.python highlighter-tree-sitter">\
-  <pre><code>print('Hello, World!')
+  <div class="language-source.python highlighter-tree-sitter"><pre><code>\
+  <span style='font-weight: bold;color: #005fd7'>print</span>(\
+  <span style='color: #008700'>&#39;Hello, World!&#39;</span>)
   </code></pre></div>
 HTML
 
 PYTHON_TREE_SITTER_INLINE_HTML = <<~HTML
   <p>The code <code class="language-source.python highlighter-tree-sitter">\
-  print('Hello, World!')</code> is valid Python.</p>
+  <span style='font-weight: bold;color: #005fd7'>print</span>(\
+  <span style='color: #008700'>&#39;Hello, World!&#39;</span>)\
+  </code> is valid Python.</p>
 HTML
 
 HTML_TREE_SITTER_HTML = <<~HTML
   <div class="language-text.html.basic highlighter-tree-sitter"><pre><code>\
-  &lt;strong&gt;The ampersand ('&amp;amp;') should be HTML escaped.&lt;/strong&gt;
+  <span style='color: #4e4e4e'>&lt;</span><span style='color: #000087'>strong</span>\
+  <span style='color: #4e4e4e'>&gt;</span>The ampersand (&#39;&amp;amp;&#39;) should \
+  be HTML escaped.<span style='color: #4e4e4e'>&lt;/</span>\
+  <span style='color: #000087'>strong</span><span style='color: #4e4e4e'>&gt;</span>
   </code></pre></div>
 HTML
 
 BAD_SYNTAX_PYTHON_TREE_SITTER_HTML = <<~HTML
-  <div class="language-source.python highlighter-tree-sitter">\
-  <pre><code>print('Hello, World!''"))
+  <div class="language-source.python highlighter-tree-sitter"><pre><code>\
+  <span style='font-weight: bold;color: #005fd7'>print</span>(\
+  <span style='color: #008700'>&#39;Hello, World!&#39;</span>&#39;&quot;))
   </code></pre></div>
 HTML
 

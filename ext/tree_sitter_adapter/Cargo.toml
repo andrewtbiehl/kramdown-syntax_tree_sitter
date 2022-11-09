@@ -10,5 +10,7 @@ crate-type = ["cdylib"]
 [dependencies]
 anyhow = "*"
 tree-sitter = "*"
+tree-sitter-cli = "*"
+tree-sitter-highlight = "*"
 tree-sitter-loader = "*"
 rutie = "*"
