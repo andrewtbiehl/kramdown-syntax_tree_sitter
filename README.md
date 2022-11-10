@@ -68,6 +68,96 @@ MARKDOWN
 Kramdown::Document.new(text, syntax_highlighter: :'tree-sitter').to_html
 ```
 
+### Usage with Jekyll
+
+This plugin can be used with the popular static site generator
+[Jekyll](https://jekyllrb.com). Jekyll projects using Kramdown for Markdown rendering
+(the default setting for Jekyll), can enable this plugin by installing the gem (most
+likely via Bundler, as described in the ['Installation'](#installation) section) and
+then adding the following lines to the Jekyll project's configuration file
+(`_config.yml`):
+
+```yaml
+plugins:
+  - kramdown/syntax_tree_sitter
+  # Other Jekyll plugins...
+kramdown:
+  syntax_highlighter: tree-sitter
+  # Other Kramdown options...
+```
+
+To highlight every code block in a Jekyll project via the plugin, make sure that every
+language identifier is expressed with the correct Tree-sitter scope and that every
+language referenced has a corresponding Tree-sitter parser library installed. See the
+subsequent ['Language identifiers'](#language-identifiers) and
+['Tree-sitter parsers'](#tree-sitter-parsers) sections for more information.
+
+Also, there are multiple ways to render highlighted code blocks with Jekyll, as
+illustrated in the following table:
+
+<table>
+<tr>
+<th>Method name</th>
+<th>Example</th>
+<th>Supported by this plugin</th>
+</tr>
+<tr>
+<td>Fenced code block</td>
+<td>
+
+---
+````
+```source.python
+print('Hello, World!')
+```
+
+or
+
+~~~source.python
+print('Hello, World!')
+~~~
+````
+---
+
+</td>
+<td>:white_check_mark:</td>
+</tr>
+<tr>
+<td>Indented code block</td>
+<td>
+
+---
+```
+    print('Hello, World!')
+{: class="language-source.python" }
+```
+---
+
+</td>
+<td>:white_check_mark:</td>
+</tr>
+<tr>
+<td>Liquid highlight tag</td>
+<td>
+
+---
+```
+{% highlight source.python %}
+print('Hello, World!')
+{% endhighlight %}
+```
+---
+
+</td>
+<td>:x:</td>
+</tr>
+</table>
+
+Since Jekyll does not defer to Kramdown to render Liquid highlight tags, this plugin
+does not support highlighting code using that method. Therefore, ***code blocks must be
+represented in either fenced or indented notation*** in order to be rendered via this
+plugin.
+
 ### Tree-sitter parsers
 
 Tree-sitter relies on external parser libraries to understand each language grammar.
