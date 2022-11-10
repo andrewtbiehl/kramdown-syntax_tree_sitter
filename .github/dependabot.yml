@@ -30,3 +30,13 @@ updates:
       - andrewtbiehl
     labels:
       - dependencies
+  - package-ecosystem: gitsubmodule
+    directory: /
+    schedule:
+      interval: daily
+    pull-request-branch-name:
+      separator: "-"
+    reviewers:
+      - andrewtbiehl
+    labels:
+      - dependencies
