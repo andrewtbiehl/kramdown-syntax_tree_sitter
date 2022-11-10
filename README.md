@@ -72,8 +72,8 @@ Kramdown::Document.new(text, syntax_highlighter: :'tree-sitter').to_html
 Tree-sitter relies on external parser libraries to understand each language grammar.
 Thus, in order to syntax highlight a given language using this plugin, that language's
 Tree-sitter parser library must be installed to the correct directory on your machine.
-This directory is set as `~/tree_sitter_parsers` by default but is also configurable (see
-the [Configuration](#configuration) section for details).
+This directory is set as `~/tree_sitter_parsers` by default but is also configurable
+(see the [Configuration](#configuration) section for details).
 
 For most such parser libraries, installation simply amounts to downloading the
 repository into the configured Tree-sitter parsers directory.
