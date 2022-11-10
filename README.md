@@ -52,7 +52,8 @@ plugin is incomplete and subject to change significantly.
 For the following example to function, the
 [Tree-sitter Python parser library](https://github.com/tree-sitter/tree-sitter-python)
 must be present inside a directory called `tree_sitter_parsers`, which in turn must be
-located in the home directory.
+located in the home directory. See the subsequent
+['Tree-sitter parsers'](#tree-sitter-parsers) section for more information.
 
 ```ruby
 require 'kramdown'
