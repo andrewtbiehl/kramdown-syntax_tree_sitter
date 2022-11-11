@@ -1,7 +1,7 @@
 # The following workflow runs upon publishing a new GitHub release
 # It builds the source into a gem and publishes it to RubyGems.org
 name: Gem Publication
-run-name: Gem Publication (Version ${{github.event.release.tag_name}})
+run-name: Gem Publication (${{github.event.release.tag_name}})
 permissions: {}
 on:
   release:
