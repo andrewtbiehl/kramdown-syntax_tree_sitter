@@ -223,6 +223,53 @@ and `smoke_test` Rake tasks to verify that new changes meet the project's code q
 standards, so it is strongly recommended that these tasks are first run locally against
 new changes before such changes are pushed.
 
+#### Release process
+
+1. Determine the new version number based on the changes being introduced. This project
+   follows the [Semantic Versioning](https://semver.org/spec/v2.0.0.html) versioning
+   standard.
+
+1. Make a commit to the trunk branch with the following changes:
+
+   - Update the project's version number (located in
+     [`lib/kramdown/syntax_tree_sitter/version.rb`](https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/blob/main/lib/kramdown/syntax_tree_sitter/version.rb)).
+
+   - Update the project's changelog
+     ([`CHANGELOG.md`](https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/blob/main/CHANGELOG.md))
+     with documentation for the new
+     version by modifying the current 'Unreleased' section accordingly.
+
+   - Add a copy of the following release template to the top of the changelog and update
+     the 'Unreleased' section link to restart the process for the next release.
+
+     ```markdown
+     ## [Unreleased]
+
+     ### Added
+     <!-- For new features -->
+
+     ### Changed
+     <!-- For changes in existing functionality -->
+
+     ### Deprecated
+     <!-- For soon-to-be removed features -->
+
+     ### Removed
+     <!-- For now removed features -->
+
+     ### Fixed
+     <!-- For any bug fixes -->
+
+     ### Security
+     <!-- In case of vulnerabilities -->
+     ```
+
+1. [Draft and publish a new GitHub release](https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/releases/new)
+   with a new trunk branch tag and title corresponding to the new version number and a
+   description copied over from the changelog. This will trigger the 'Gem Publication'
+   GitHub Actions workflow, which will push the new version to
+   [RubyGems.org](https://rubygems.org).
+
 ## About
 
 [Tree-sitter](https://tree-sitter.github.io/tree-sitter) is a modern, general-purpose
