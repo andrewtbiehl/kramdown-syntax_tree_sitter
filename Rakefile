@@ -15,6 +15,7 @@ CLOBBER.include 'Gemfile.lock', 'ext/**/target/'
 
 Rake::Task[:install].clear_actions
 Rake::Task[:'install:local'].clear
+Rake::Task[:release].clear
 RuboCop::RakeTask.new
 
 task default: %i[rubocop test]
