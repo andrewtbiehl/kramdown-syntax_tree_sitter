@@ -1,5 +1,7 @@
 # Kramdown Tree-sitter Highlighter
 
+[![Build status](https://img.shields.io/github/workflow/status/andrewtbiehl/kramdown-syntax_tree_sitter/Quality%20Control?style=flat-square&logo=github)](https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/actions/workflows/quality-control.yml)
+
 ***Syntax highlight code with [Tree-sitter](https://tree-sitter.github.io/tree-sitter)
 via [Kramdown](https://kramdown.gettalong.org).***
 
