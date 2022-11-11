@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.files = Dir['LICENSE.txt', 'README.md', 'ext/**/*.rs', 'ext/**/Cargo.lock',
                    'ext/**/Cargo.toml', 'ext/tasks.rake', 'lib/**/*.rb']
   spec.extensions = ['ext/Rakefile']
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end
