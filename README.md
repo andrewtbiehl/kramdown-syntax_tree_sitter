@@ -223,6 +223,9 @@ and `smoke_test` Rake tasks to verify that new changes meet the project's code q
 standards, so it is strongly recommended that these tasks are first run locally against
 new changes before such changes are pushed.
 
+The 'Unreleased' section of the changelog should also be updated accordingly whenever
+significant changes are introduced.
+
 #### Release process
 
 1. Determine the new version number based on the changes being introduced. This project
