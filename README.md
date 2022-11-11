@@ -1,6 +1,3 @@
-***:construction: This project is in early initial development and is not yet
-functional. :construction:***
-
 # Kramdown Tree-sitter Highlighter
 
 ***Syntax highlight code with [Tree-sitter](https://tree-sitter.github.io/tree-sitter)
@@ -43,9 +40,6 @@ gem build && gem install kramdown-syntax_tree_sitter
 ```
 
 ## Usage
-
-Please note that this project is in early initial development; the behavior of this
-plugin is incomplete and subject to change significantly.
 
 ### Quickstart
 
