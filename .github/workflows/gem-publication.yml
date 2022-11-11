@@ -1,0 +1,27 @@
+# The following workflow runs upon publishing a new GitHub release
+# It builds the source into a gem and publishes it to RubyGems.org
+name: Gem Publication
+run-name: Gem Publication (Version ${{github.event.release.tag_name}})
+permissions: {}
+on:
+  release:
+    types:
+      - published
+concurrency: gem_publication
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v3.1.0
+      - name: Install project-compatible Ruby
+        uses: ruby/setup-ruby@v1.121.0
+        with:
+          ruby-version: 3.1.2
+          bundler: 2.3.25
+          bundler-cache: true
+      - name: Build and publish gem
+        run: bundle exec rake publish
+        env:
+          GEM_HOST_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
