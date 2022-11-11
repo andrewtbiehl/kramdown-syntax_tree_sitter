@@ -187,8 +187,7 @@ of the Kramdown option `syntax_highlighter_opts`:
 
 ## Contributing
 
-This project is not currently open for contributions, but will be as soon as the initial
-MVP version is released.
+Contributions are welcome!
 
 ### Development
 
