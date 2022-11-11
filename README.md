@@ -29,14 +29,13 @@ For projects using [Bundler](https://bundler.io) for dependency management, run 
 following command to both install the gem and add it to the Gemfile:
 
 ```shell
-bundle add kramdown-syntax_tree_sitter --github andrewtbiehl/kramdown-syntax_tree_sitter
+bundle add kramdown-syntax_tree_sitter
 ```
 
-Otherwise, download this project's repository and then run the following command from
-within it to build and install the gem:
+Otherwise, install the gem via the following command:
 
 ```shell
-gem build && gem install kramdown-syntax_tree_sitter
+gem install kramdown-syntax_tree_sitter
 ```
 
 ## Usage
