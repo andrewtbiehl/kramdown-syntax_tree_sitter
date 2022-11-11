@@ -3,6 +3,7 @@
 require 'bundler/gem_tasks'
 require 'rake/testtask'
 require 'rubocop/rake_task'
+require 'rubygems/commands/push_command'
 
 load 'ext/tasks.rake'
 
@@ -55,10 +56,24 @@ task :console do
   Bundler.unbundled_exec CONSOLE_EXECUTABLE_FILE
 end
 
+desc [
+  "Publish the gem to RubyGems.org (requires the 'GEM_HOST_API_KEY' environment",
+  'variable to be set correctly)'
+].join(' ')
+task publish: :build do
+  push_gem Dir.glob('pkg/*.gem').first
+end
+
 def install_gem(name)
   Bundler.unbundled_system "gem install #{name}"
 end
 
 def uninstall_gem(name)
   Bundler.unbundled_system "gem uninstall #{name}"
+end
+
+def push_gem(name)
+  command = Gem::Commands::PushCommand.new
+  command.options[:args] = [name]
+  command.execute
 end
