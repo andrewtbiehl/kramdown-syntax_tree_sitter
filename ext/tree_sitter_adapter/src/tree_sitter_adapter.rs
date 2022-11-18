@@ -139,15 +139,15 @@ fn render_html<'a, F: Fn(Highlight) -> &'a [u8]>(
 fn get_css_styles<'a>(
     theme: &'a Theme,
     default_css_style: &'a String,
-) -> impl Fn(Highlight) -> &'a [u8] {
-    |highlight| {
+) -> Box<dyn Fn(Highlight) -> &'a [u8] + 'a> {
+    Box::new(|highlight| {
         theme
             .styles
             .get(highlight.0)
             .and_then(|style| style.css.as_ref())
             .unwrap_or(default_css_style)
             .as_bytes()
-    }
+    })
 }
 
 trait ResultExt<T, E> {
