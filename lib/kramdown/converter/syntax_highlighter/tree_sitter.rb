@@ -26,9 +26,9 @@ module Kramdown
         end
 
         def self.get_parsers_dir(converter)
-          get_option(converter, :tree_sitter_parsers_dir)
-            .then { _1 || DEFAULT_PARSERS_DIR }
-            .then { File.expand_path _1 }
+          File.expand_path(
+            get_option(converter, :tree_sitter_parsers_dir) || DEFAULT_PARSERS_DIR
+          )
         end
 
         def self.get_option(converter, name)
