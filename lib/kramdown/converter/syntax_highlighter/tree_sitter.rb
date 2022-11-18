@@ -16,8 +16,11 @@ module Kramdown
         def self.call(converter, raw_text, language, type, _)
           return nil unless language
 
-          parsers_dir = get_parsers_dir converter
-          rendered_text = TreeSitterAdapter.highlight raw_text, parsers_dir, language
+          rendered_text = TreeSitterAdapter.highlight(
+            raw_text,
+            get_parsers_dir(converter),
+            language
+          )
           # Code blocks are additionally wrapped in HTML code tags
           type == :block ? "<pre><code>#{rendered_text}</code></pre>" : rendered_text
         end
