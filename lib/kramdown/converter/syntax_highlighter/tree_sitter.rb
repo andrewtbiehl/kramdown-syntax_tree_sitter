@@ -16,12 +16,16 @@ module Kramdown
         def self.call(converter, raw_text, language, type, _)
           return nil unless language
 
-          parsers_dir = get_option(converter, :tree_sitter_parsers_dir)
-                        .then { _1 || DEFAULT_PARSERS_DIR }
-                        .then { File.expand_path _1 }
+          parsers_dir = get_parsers_dir converter
           rendered_text = TreeSitterAdapter.highlight raw_text, parsers_dir, language
           # Code blocks are additionally wrapped in HTML code tags
           type == :block ? "<pre><code>#{rendered_text}</code></pre>" : rendered_text
+        end
+
+        def self.get_parsers_dir(converter)
+          get_option(converter, :tree_sitter_parsers_dir)
+            .then { _1 || DEFAULT_PARSERS_DIR }
+            .then { File.expand_path _1 }
         end
 
         def self.get_option(converter, name)
