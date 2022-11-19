@@ -64,12 +64,12 @@ impl LoaderExt for Loader {
             .transpose()
             .context("Language not found")
             .flatten_()
+            .with_context(|| format!("{NO_LANGUAGE_ERROR_MSG} '{scope}'"))
             .map(|(language, config)| LanguageConfigurationAdapter {
                 scope,
                 language,
                 config,
             })
-            .with_context(|| format!("{NO_LANGUAGE_ERROR_MSG} '{scope}'"))
     }
 }
 
