@@ -9,6 +9,7 @@ use tree_sitter_loader::{Config, LanguageConfiguration, Loader};
 
 const LOADER_ERROR_MSG: &str = "Error loading Tree-sitter parsers from directory";
 const NO_LANGUAGE_ERROR_MSG: &str = "Error retrieving language configuration for scope";
+const NO_HIGHLIGHT_ERROR_MSG: &str = "Error retrieving highlight configuration for scope";
 
 pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, String> {
     let parsers_dir = PathBuf::from(parsers_dir);
@@ -63,12 +64,17 @@ impl LoaderExt for Loader {
             .transpose()
             .context("Language not found")
             .flatten_()
-            .map(|(language, config)| LanguageConfigurationAdapter { language, config })
+            .map(|(language, config)| LanguageConfigurationAdapter {
+                scope,
+                language,
+                config,
+            })
             .with_context(|| format!("{NO_LANGUAGE_ERROR_MSG} '{scope}'"))
     }
 }
 
 struct LanguageConfigurationAdapter<'a> {
+    scope: &'a str,
     language: Language,
     config: &'a LanguageConfiguration<'a>,
 }
@@ -78,7 +84,7 @@ impl<'a> LanguageConfigurationAdapter<'a> {
         self.config
             .highlight_config(self.language)
             .transpose()
-            .context("Another issue")
+            .with_context(|| format!("{NO_HIGHLIGHT_ERROR_MSG} '{}'", self.scope))
             .flatten_()
     }
 }
