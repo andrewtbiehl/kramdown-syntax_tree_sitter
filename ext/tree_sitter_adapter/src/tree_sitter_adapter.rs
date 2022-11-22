@@ -1,4 +1,4 @@
-use anyhow::{Context, Error, Result};
+use anyhow::{Context, Result};
 use std::convert;
 use std::path::PathBuf;
 use tree_sitter::Language;
@@ -12,7 +12,7 @@ const NO_LANGUAGE_ERROR_MSG: &str = "Error retrieving language configuration for
 const NO_HIGHLIGHT_ERROR_MSG: &str = "Error retrieving highlight configuration for scope";
 
 pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, String> {
-    highlight_adapter(code, parsers_dir, scope).map_err(Error::to_formatted_string)
+    highlight_adapter(code, parsers_dir, scope).map_err(|e| format!("{e:#}"))
 }
 
 fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<String> {
@@ -166,15 +166,5 @@ trait ResultExt<T, E> {
 impl<T, E> ResultExt<T, E> for Result<Result<T, E>, E> {
     fn flatten_(self) -> Result<T, E> {
         self.and_then(convert::identity)
-    }
-}
-
-trait ErrorExt {
-    fn to_formatted_string(self) -> String;
-}
-
-impl ErrorExt for Error {
-    fn to_formatted_string(self) -> String {
-        format!("{self:#}")
     }
 }
