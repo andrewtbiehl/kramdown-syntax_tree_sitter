@@ -24,8 +24,7 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
         .language_configuration_from_scope(scope)
         .and_then(LanguageConfigurationAdapter::highlight_config)
         .and_then(|config| {
-            let default_css_style = String::new();
-            let css_attribute_callback = get_css_styles(&theme, &default_css_style);
+            let css_attribute_callback = get_css_styles(&theme);
             HighlighterAdapter::new(&loader, config)
                 .highlight(code)
                 .and_then(|highlights| render_html(highlights, &css_attribute_callback))
@@ -145,16 +144,14 @@ fn render_html<'a, F: Fn(Highlight) -> &'a [u8]>(
     Ok(renderer.lines().collect())
 }
 
-fn get_css_styles<'a>(
-    theme: &'a Theme,
-    default_css_style: &'a String,
-) -> Box<dyn Fn(Highlight) -> &'a [u8] + 'a> {
+fn get_css_styles<'a>(theme: &'a Theme) -> Box<dyn Fn(Highlight) -> &'a [u8] + 'a> {
     Box::new(|highlight| {
         theme
             .styles
             .get(highlight.0)
             .and_then(|style| style.css.as_ref())
-            .unwrap_or(default_css_style)
+            .map(String::as_str)
+            .unwrap_or_default()
             .as_bytes()
     })
 }
