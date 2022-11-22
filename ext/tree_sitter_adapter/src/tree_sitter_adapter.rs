@@ -12,9 +12,13 @@ const NO_LANGUAGE_ERROR_MSG: &str = "Error retrieving language configuration for
 const NO_HIGHLIGHT_ERROR_MSG: &str = "Error retrieving highlight configuration for scope";
 
 pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, String> {
+    highlight_adapter(code, parsers_dir, scope).map_err(Error::to_formatted_string)
+}
+
+fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<String> {
     let parsers_dir = PathBuf::from(parsers_dir);
     let theme = Theme::default();
-    let mut loader = Loader::new_from_dir(parsers_dir).map_err(Error::to_formatted_string)?;
+    let mut loader = Loader::new_from_dir(parsers_dir)?;
     loader.configure_highlights(&theme.highlight_names);
     loader
         .language_configuration_from_scope(scope)
@@ -26,7 +30,6 @@ pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, S
                 .highlight(code)
                 .and_then(|highlights| render_html(highlights, &css_attribute_callback))
         })
-        .map_err(Error::to_formatted_string)
 }
 
 trait LoaderExt {
