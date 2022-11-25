@@ -114,8 +114,7 @@ impl<'a> HighlighterAdapter<'a> {
     fn highlight(
         &'a mut self,
         code: &'a str,
-    ) -> Result<HighlightsAdapter<'a, impl Iterator<Item = Result<HighlightEvent, TSError>> + 'a>>
-    {
+    ) -> Result<HighlightsAdapter<'a, impl Iterator<Item = Result<HighlightEvent, TSError>>>> {
         let Self {
             loader,
             config,
@@ -125,13 +124,15 @@ impl<'a> HighlighterAdapter<'a> {
             .highlight(config, code.as_bytes(), None, |s| {
                 loader.highlight_config_for_injection_string(s)
             })
+            .map(Iterator::collect)
+            .map(Vec::into_iter)
             .map(|highlights| HighlightsAdapter { code, highlights })
             .map_err(Into::into)
     }
 }
 
 fn render_html<'a, F: Fn(Highlight) -> &'a [u8]>(
-    highlights: HighlightsAdapter<'a, impl Iterator<Item = Result<HighlightEvent, TSError>> + 'a>,
+    highlights: HighlightsAdapter<'a, impl Iterator<Item = Result<HighlightEvent, TSError>>>,
     css_attribute_callback: &F,
 ) -> Result<String> {
     let HighlightsAdapter { code, highlights } = highlights;
