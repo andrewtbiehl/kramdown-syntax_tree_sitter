@@ -25,8 +25,7 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
         .and_then(LanguageConfigurationAdapter::highlight_config)
         .and_then(|config| {
             let css_attribute_callback = get_css_styles(&theme);
-            HighlighterAdapter::new(&loader, config)
-                .highlight(code)
+            highlights(code, &loader, config)
                 .and_then(|highlights| render_html(highlights, code, &css_attribute_callback))
         })
 }
@@ -91,38 +90,18 @@ impl<'a> LanguageConfigurationAdapter<'a> {
     }
 }
 
-struct HighlighterAdapter<'a> {
-    loader: &'a Loader,
-    config: &'a HighlightConfiguration,
-    highlighter: Highlighter,
-}
-
-impl<'a> HighlighterAdapter<'a> {
-    fn new(loader: &'a Loader, config: &'a HighlightConfiguration) -> Self {
-        Self {
-            loader,
-            config,
-            highlighter: Highlighter::new(),
-        }
-    }
-
-    fn highlight(
-        &'a mut self,
-        code: &'a str,
-    ) -> Result<impl Iterator<Item = Result<HighlightEvent, TSError>>> {
-        let Self {
-            loader,
-            config,
-            highlighter,
-        } = self;
-        highlighter
-            .highlight(config, code.as_bytes(), None, |s| {
-                loader.highlight_config_for_injection_string(s)
-            })
-            .map(Iterator::collect)
-            .map(Vec::into_iter)
-            .map_err(Into::into)
-    }
+fn highlights(
+    code: &str,
+    loader: &Loader,
+    config: &HighlightConfiguration,
+) -> Result<impl Iterator<Item = Result<HighlightEvent, TSError>>> {
+    Highlighter::new()
+        .highlight(config, code.as_bytes(), None, |s| {
+            loader.highlight_config_for_injection_string(s)
+        })
+        .map(Iterator::collect)
+        .map(Vec::into_iter)
+        .map_err(Into::into)
 }
 
 fn render_html<'a, F: Fn(Highlight) -> &'a [u8]>(
