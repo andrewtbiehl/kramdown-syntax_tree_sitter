@@ -27,7 +27,7 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
             let css_attribute_callback = get_css_styles(&theme);
             HighlighterAdapter::new(&loader, config)
                 .highlight(code)
-                .and_then(|highlights| render_html(highlights, &css_attribute_callback))
+                .and_then(|highlights| render_html(highlights, code, &css_attribute_callback))
         })
 }
 
@@ -91,11 +91,6 @@ impl<'a> LanguageConfigurationAdapter<'a> {
     }
 }
 
-struct HighlightsAdapter<'a, T: Iterator<Item = Result<HighlightEvent, TSError>>> {
-    code: &'a str,
-    highlights: T,
-}
-
 struct HighlighterAdapter<'a> {
     loader: &'a Loader,
     config: &'a HighlightConfiguration,
@@ -114,7 +109,7 @@ impl<'a> HighlighterAdapter<'a> {
     fn highlight(
         &'a mut self,
         code: &'a str,
-    ) -> Result<HighlightsAdapter<'a, impl Iterator<Item = Result<HighlightEvent, TSError>>>> {
+    ) -> Result<impl Iterator<Item = Result<HighlightEvent, TSError>>> {
         let Self {
             loader,
             config,
@@ -126,16 +121,15 @@ impl<'a> HighlighterAdapter<'a> {
             })
             .map(Iterator::collect)
             .map(Vec::into_iter)
-            .map(|highlights| HighlightsAdapter { code, highlights })
             .map_err(Into::into)
     }
 }
 
 fn render_html<'a, F: Fn(Highlight) -> &'a [u8]>(
-    highlights: HighlightsAdapter<'a, impl Iterator<Item = Result<HighlightEvent, TSError>>>,
+    highlights: impl Iterator<Item = Result<HighlightEvent, TSError>>,
+    code: &'a str,
     css_attribute_callback: &F,
 ) -> Result<String> {
-    let HighlightsAdapter { code, highlights } = highlights;
     let mut renderer = HtmlRenderer::new();
     renderer.render(highlights, code.as_bytes(), css_attribute_callback)?;
     // Remove erroneously appended newline
