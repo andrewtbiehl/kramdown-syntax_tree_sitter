@@ -23,7 +23,13 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     let (language, config) = language_and_configuration(&loader, scope)?;
     let config = highlight_config(language, config, scope)?;
     let highlights = highlights(code, &loader, config)?;
-    let css_attribute_callback = get_css_styles(&theme);
+    let inline_css_styles = theme
+        .styles
+        .into_iter()
+        .map(|s| s.css)
+        .map(Option::unwrap_or_default)
+        .collect::<Vec<_>>();
+    let css_attribute_callback = get_css_styles(&inline_css_styles);
     render_html(highlights, code, &css_attribute_callback)
 }
 
@@ -105,12 +111,10 @@ where
     Ok(renderer.lines().collect())
 }
 
-fn get_css_styles<'a>(theme: &'a Theme) -> Box<dyn Fn(Highlight) -> &'a [u8] + 'a> {
+fn get_css_styles<'a>(styles: &'a [String]) -> Box<dyn Fn(Highlight) -> &'a [u8] + 'a> {
     Box::new(|highlight| {
-        theme
-            .styles
+        styles
             .get(highlight.0)
-            .and_then(|style| style.css.as_ref())
             .map(String::as_str)
             .unwrap_or_default()
             .as_bytes()
