@@ -29,8 +29,7 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
         .map(|s| s.css)
         .map(Option::unwrap_or_default)
         .collect::<Vec<_>>();
-    let css_attribute_callback = create_css_attribute_callback(&inline_css_styles);
-    render_html(highlights, code, &css_attribute_callback)
+    render_html(highlights, code, &inline_css_styles)
 }
 
 trait LoaderExt {
@@ -94,16 +93,14 @@ fn highlights(
         .map_err(Into::into)
 }
 
-fn render_html<'a, F>(
+fn render_html(
     highlights: impl Iterator<Item = Result<HighlightEvent, TSError>>,
-    code: &'a str,
-    css_attribute_callback: &F,
-) -> Result<String>
-where
-    F: Fn(Highlight) -> &'a [u8],
-{
+    code: &str,
+    css_attributes: &[String],
+) -> Result<String> {
+    let css_attribute_callback = create_css_attribute_callback(css_attributes);
     let mut renderer = HtmlRenderer::new();
-    renderer.render(highlights, code.as_bytes(), css_attribute_callback)?;
+    renderer.render(highlights, code.as_bytes(), &css_attribute_callback)?;
     // Remove erroneously appended newline
     if renderer.html.ends_with(&[b'\n']) && !code.ends_with('\n') {
         renderer.html.pop();
