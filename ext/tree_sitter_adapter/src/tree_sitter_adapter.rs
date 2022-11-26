@@ -22,7 +22,7 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     loader.configure_highlights(&theme.highlight_names);
     loader
         .language_configuration_from_scope(scope)
-        .and_then(LanguageConfigurationAdapter::highlight_config)
+        .and_then(|(language, config)| highlight_config(language, config, scope))
         .and_then(|config| {
             let css_attribute_callback = get_css_styles(&theme);
             highlights(code, &loader, config)
@@ -36,7 +36,7 @@ trait LoaderExt {
     fn language_configuration_from_scope<'a>(
         &'a self,
         scope: &'a str,
-    ) -> Result<LanguageConfigurationAdapter<'a>>;
+    ) -> Result<(Language, &'a LanguageConfiguration<'a>)>;
 }
 
 impl LoaderExt for Loader {
@@ -60,34 +60,25 @@ impl LoaderExt for Loader {
     fn language_configuration_from_scope<'a>(
         &'a self,
         scope: &'a str,
-    ) -> Result<LanguageConfigurationAdapter<'a>> {
+    ) -> Result<(Language, &'a LanguageConfiguration<'a>)> {
         self.language_configuration_for_scope(scope)
             .transpose()
             .context("Language not found")
             .flatten_()
             .with_context(|| format!("{NO_LANGUAGE_ERROR_MSG} '{scope}'"))
-            .map(|(language, config)| LanguageConfigurationAdapter {
-                scope,
-                language,
-                config,
-            })
     }
 }
 
-struct LanguageConfigurationAdapter<'a> {
-    scope: &'a str,
+fn highlight_config<'a>(
     language: Language,
     config: &'a LanguageConfiguration<'a>,
-}
-
-impl<'a> LanguageConfigurationAdapter<'a> {
-    fn highlight_config(self) -> Result<&'a HighlightConfiguration> {
-        self.config
-            .highlight_config(self.language)
-            .transpose()
-            .with_context(|| format!("{NO_HIGHLIGHT_ERROR_MSG} '{}'", self.scope))
-            .flatten_()
-    }
+    scope: &'a str,
+) -> Result<&'a HighlightConfiguration> {
+    config
+        .highlight_config(language)
+        .transpose()
+        .with_context(|| format!("{NO_HIGHLIGHT_ERROR_MSG} '{}'", scope))
+        .flatten_()
 }
 
 fn highlights(
