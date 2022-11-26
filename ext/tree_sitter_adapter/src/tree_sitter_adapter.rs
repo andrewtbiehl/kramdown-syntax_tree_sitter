@@ -98,7 +98,13 @@ fn render_html(
     code: &str,
     css_attributes: &[String],
 ) -> Result<String> {
-    let css_attribute_callback = create_css_attribute_callback(css_attributes);
+    let css_attribute_callback = |h: Highlight| {
+        css_attributes
+            .get(h.0)
+            .map(String::as_str)
+            .unwrap_or_default()
+            .as_bytes()
+    };
     let mut renderer = HtmlRenderer::new();
     renderer.render(highlights, code.as_bytes(), &css_attribute_callback)?;
     // Remove erroneously appended newline
@@ -106,18 +112,6 @@ fn render_html(
         renderer.html.pop();
     }
     Ok(renderer.lines().collect())
-}
-
-fn create_css_attribute_callback<'a>(
-    css_attributes: &'a [String],
-) -> Box<dyn Fn(Highlight) -> &'a [u8] + 'a> {
-    Box::new(|highlight| {
-        css_attributes
-            .get(highlight.0)
-            .map(String::as_str)
-            .unwrap_or_default()
-            .as_bytes()
-    })
 }
 
 trait ResultExt<T, E> {
