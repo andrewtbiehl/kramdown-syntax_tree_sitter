@@ -20,13 +20,11 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     let theme = Theme::default();
     let mut loader = Loader::new_from_dir(parsers_dir)?;
     loader.configure_highlights(&theme.highlight_names);
-    language_configuration(&loader, scope)
-        .and_then(|(language, config)| highlight_config(language, config, scope))
-        .and_then(|config| {
-            let css_attribute_callback = get_css_styles(&theme);
-            highlights(code, &loader, config)
-                .and_then(|highlights| render_html(highlights, code, &css_attribute_callback))
-        })
+    let (language, config) = language_configuration(&loader, scope)?;
+    let config = highlight_config(language, config, scope)?;
+    let highlights = highlights(code, &loader, config)?;
+    let css_attribute_callback = get_css_styles(&theme);
+    render_html(highlights, code, &css_attribute_callback)
 }
 
 trait LoaderExt {
