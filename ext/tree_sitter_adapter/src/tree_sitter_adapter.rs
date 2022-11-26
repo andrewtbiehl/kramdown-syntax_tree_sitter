@@ -20,7 +20,7 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     let theme = Theme::default();
     let mut loader = Loader::new_from_dir(parsers_dir)?;
     loader.configure_highlights(&theme.highlight_names);
-    let (language, config) = language_configuration(&loader, scope)?;
+    let (language, config) = language_and_configuration(&loader, scope)?;
     let config = highlight_config(language, config, scope)?;
     let highlights = highlights(code, &loader, config)?;
     let css_attribute_callback = get_css_styles(&theme);
@@ -50,7 +50,7 @@ impl LoaderExt for Loader {
     }
 }
 
-fn language_configuration<'a>(
+fn language_and_configuration<'a>(
     loader: &'a Loader,
     scope: &'a str,
 ) -> Result<(Language, &'a LanguageConfiguration<'a>)> {
