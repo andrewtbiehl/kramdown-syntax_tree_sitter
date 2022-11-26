@@ -20,8 +20,7 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     let theme = Theme::default();
     let mut loader = Loader::new_from_dir(parsers_dir)?;
     loader.configure_highlights(&theme.highlight_names);
-    loader
-        .language_configuration_from_scope(scope)
+    language_configuration(&loader, scope)
         .and_then(|(language, config)| highlight_config(language, config, scope))
         .and_then(|config| {
             let css_attribute_callback = get_css_styles(&theme);
@@ -32,11 +31,6 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
 
 trait LoaderExt {
     fn new_from_dir(parser_directory: PathBuf) -> Result<Loader>;
-
-    fn language_configuration_from_scope<'a>(
-        &'a self,
-        scope: &'a str,
-    ) -> Result<(Language, &'a LanguageConfiguration<'a>)>;
 }
 
 impl LoaderExt for Loader {
@@ -56,17 +50,18 @@ impl LoaderExt for Loader {
                 format!("{LOADER_ERROR_MSG} '{parser_directory_string}'")
             })
     }
+}
 
-    fn language_configuration_from_scope<'a>(
-        &'a self,
-        scope: &'a str,
-    ) -> Result<(Language, &'a LanguageConfiguration<'a>)> {
-        self.language_configuration_for_scope(scope)
-            .transpose()
-            .context("Language not found")
-            .flatten_()
-            .with_context(|| format!("{NO_LANGUAGE_ERROR_MSG} '{scope}'"))
-    }
+fn language_configuration<'a>(
+    loader: &'a Loader,
+    scope: &'a str,
+) -> Result<(Language, &'a LanguageConfiguration<'a>)> {
+    loader
+        .language_configuration_for_scope(scope)
+        .transpose()
+        .context("Language not found")
+        .flatten_()
+        .with_context(|| format!("{NO_LANGUAGE_ERROR_MSG} '{scope}'"))
 }
 
 fn highlight_config<'a>(
