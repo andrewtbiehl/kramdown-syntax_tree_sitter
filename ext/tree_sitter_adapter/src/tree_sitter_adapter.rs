@@ -70,7 +70,7 @@ fn highlight_config<'a>(
     config
         .highlight_config(language)
         .transpose()
-        .with_context(|| format!("{NO_HIGHLIGHT_ERROR_MSG} '{}'", scope))
+        .with_context(|| format!("{NO_HIGHLIGHT_ERROR_MSG} '{scope}'"))
         .flatten_()
 }
 
