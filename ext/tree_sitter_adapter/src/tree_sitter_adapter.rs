@@ -29,7 +29,7 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
         .map(|s| s.css)
         .map(Option::unwrap_or_default)
         .collect::<Vec<_>>();
-    let css_attribute_callback = get_css_styles(&inline_css_styles);
+    let css_attribute_callback = create_css_attribute_callback(&inline_css_styles);
     render_html(highlights, code, &css_attribute_callback)
 }
 
@@ -111,9 +111,11 @@ where
     Ok(renderer.lines().collect())
 }
 
-fn get_css_styles<'a>(styles: &'a [String]) -> Box<dyn Fn(Highlight) -> &'a [u8] + 'a> {
+fn create_css_attribute_callback<'a>(
+    css_attributes: &'a [String],
+) -> Box<dyn Fn(Highlight) -> &'a [u8] + 'a> {
     Box::new(|highlight| {
-        styles
+        css_attributes
             .get(highlight.0)
             .map(String::as_str)
             .unwrap_or_default()
