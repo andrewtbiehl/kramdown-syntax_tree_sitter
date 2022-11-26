@@ -88,11 +88,14 @@ fn highlights(
         .map_err(Into::into)
 }
 
-fn render_html<'a, F: Fn(Highlight) -> &'a [u8]>(
+fn render_html<'a, F>(
     highlights: impl Iterator<Item = Result<HighlightEvent, TSError>>,
     code: &'a str,
     css_attribute_callback: &F,
-) -> Result<String> {
+) -> Result<String>
+where
+    F: Fn(Highlight) -> &'a [u8],
+{
     let mut renderer = HtmlRenderer::new();
     renderer.render(highlights, code.as_bytes(), css_attribute_callback)?;
     // Remove erroneously appended newline
