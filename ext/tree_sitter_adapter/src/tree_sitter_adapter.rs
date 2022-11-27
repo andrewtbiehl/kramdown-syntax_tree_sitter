@@ -21,14 +21,14 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     let loader = loader(parsers_dir, &theme.highlight_names)?;
     let (language, config) = language_and_configuration(&loader, scope)?;
     let config = highlight_config(language, config, scope)?;
-    let highlights = highlights(code, &loader, config)?;
+    let highlights = highlights(code, config, &loader)?;
     let inline_css_styles = theme
         .styles
         .into_iter()
         .map(|s| s.css)
         .map(Option::unwrap_or_default)
         .collect::<Vec<_>>();
-    render_html(highlights, code, &inline_css_styles)
+    render_html(code, highlights, &inline_css_styles)
 }
 
 fn loader(parser_directory: PathBuf, highlight_names: &Vec<String>) -> Result<Loader> {
@@ -75,8 +75,8 @@ fn highlight_config<'a>(
 
 fn highlights(
     code: &str,
-    loader: &Loader,
     config: &HighlightConfiguration,
+    loader: &Loader,
 ) -> Result<impl Iterator<Item = Result<HighlightEvent, TSError>>> {
     Highlighter::new()
         .highlight(config, code.as_bytes(), None, |s| {
@@ -88,8 +88,8 @@ fn highlights(
 }
 
 fn render_html(
-    highlights: impl Iterator<Item = Result<HighlightEvent, TSError>>,
     code: &str,
+    highlights: impl Iterator<Item = Result<HighlightEvent, TSError>>,
     css_attributes: &[String],
 ) -> Result<String> {
     let css_attribute_callback = |h: Highlight| {
