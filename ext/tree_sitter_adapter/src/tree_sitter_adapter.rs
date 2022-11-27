@@ -18,8 +18,7 @@ pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, S
 fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<String> {
     let parsers_dir = PathBuf::from(parsers_dir);
     let theme = Theme::default();
-    let mut loader = loader(parsers_dir)?;
-    loader.configure_highlights(&theme.highlight_names);
+    let loader = loader(parsers_dir, &theme.highlight_names)?;
     let (language, config) = language_and_configuration(&loader, scope)?;
     let config = highlight_config(language, config, scope)?;
     let highlights = highlights(code, &loader, config)?;
@@ -32,7 +31,7 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     render_html(highlights, code, &inline_css_styles)
 }
 
-fn loader(parser_directory: PathBuf) -> Result<Loader> {
+fn loader(parser_directory: PathBuf, highlight_names: &Vec<String>) -> Result<Loader> {
     Loader::new()
         .and_then(|mut loader| {
             let config = {
@@ -41,6 +40,7 @@ fn loader(parser_directory: PathBuf) -> Result<Loader> {
                 Config { parser_directories }
             };
             loader.find_all_languages(&config)?;
+            loader.configure_highlights(highlight_names);
             Ok(loader)
         })
         .with_context(|| {
