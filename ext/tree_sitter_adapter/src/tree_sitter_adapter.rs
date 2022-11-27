@@ -11,24 +11,14 @@ const LOADER_ERROR_MSG: &str = "Error loading Tree-sitter parsers from directory
 const NO_LANGUAGE_ERROR_MSG: &str = "Error retrieving language configuration for scope";
 const NO_HIGHLIGHT_ERROR_MSG: &str = "Error retrieving highlight configuration for scope";
 
-pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, String> {
-    highlight_adapter(code, parsers_dir, scope).map_err(|e| format!("{e:#}"))
+trait ResultExt<T, E> {
+    fn flatten_(self) -> Result<T, E>;
 }
 
-fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<String> {
-    let parsers_dir = PathBuf::from(parsers_dir);
-    let theme = Theme::default();
-    let loader = loader(parsers_dir, &theme.highlight_names)?;
-    let (language, config) = language_and_configuration(&loader, scope)?;
-    let highlight_config = highlight_configuration(language, config, scope)?;
-    let highlights = highlights(code, highlight_config, &loader)?;
-    let inline_css_attributes = theme
-        .styles
-        .into_iter()
-        .map(|s| s.css)
-        .map(Option::unwrap_or_default)
-        .collect::<Vec<_>>();
-    render_html(code, highlights, &inline_css_attributes)
+impl<T, E> ResultExt<T, E> for Result<Result<T, E>, E> {
+    fn flatten_(self) -> Result<T, E> {
+        self.and_then(convert::identity)
+    }
 }
 
 fn loader(parser_directory: PathBuf, highlight_names: &Vec<String>) -> Result<Loader> {
@@ -114,12 +104,22 @@ fn render_html(
     Ok(renderer.lines().collect())
 }
 
-trait ResultExt<T, E> {
-    fn flatten_(self) -> Result<T, E>;
+fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<String> {
+    let parsers_dir = PathBuf::from(parsers_dir);
+    let theme = Theme::default();
+    let loader = loader(parsers_dir, &theme.highlight_names)?;
+    let (language, config) = language_and_configuration(&loader, scope)?;
+    let highlight_config = highlight_configuration(language, config, scope)?;
+    let highlights = highlights(code, highlight_config, &loader)?;
+    let inline_css_attributes = theme
+        .styles
+        .into_iter()
+        .map(|s| s.css)
+        .map(Option::unwrap_or_default)
+        .collect::<Vec<_>>();
+    render_html(code, highlights, &inline_css_attributes)
 }
 
-impl<T, E> ResultExt<T, E> for Result<Result<T, E>, E> {
-    fn flatten_(self) -> Result<T, E> {
-        self.and_then(convert::identity)
-    }
+pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, String> {
+    highlight_adapter(code, parsers_dir, scope).map_err(|e| format!("{e:#}"))
 }
