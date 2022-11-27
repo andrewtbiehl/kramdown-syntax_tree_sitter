@@ -87,18 +87,24 @@ fn highlights(
         .map_err(Into::into)
 }
 
+fn create_html_attribute_callback<'a>(
+    html_attributes: &'a [String],
+) -> impl Fn(Highlight) -> &'a [u8] {
+    |highlight| {
+        html_attributes
+            .get(highlight.0)
+            .map(String::as_str)
+            .unwrap_or_default()
+            .as_bytes()
+    }
+}
+
 fn render_html(
     code: &str,
     highlights: impl Iterator<Item = Result<HighlightEvent, TSError>>,
     html_attributes: &[String],
 ) -> Result<String> {
-    let html_attribute_callback = |h: Highlight| {
-        html_attributes
-            .get(h.0)
-            .map(String::as_str)
-            .unwrap_or_default()
-            .as_bytes()
-    };
+    let html_attribute_callback = create_html_attribute_callback(html_attributes);
     let mut renderer = HtmlRenderer::new();
     renderer.render(highlights, code.as_bytes(), &html_attribute_callback)?;
     // Remove erroneously appended newline
