@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- For changes in existing functionality -->
 
 - Improved the error message for missing highlight configuration errors.
+- Significantly refactored the internal Rust implementation. No known behavior changes
+  were introduced as part of this refactor.
 
 ### Deprecated
 <!-- For soon-to-be removed features -->
