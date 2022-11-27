@@ -20,15 +20,15 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     let theme = Theme::default();
     let loader = loader(parsers_dir, &theme.highlight_names)?;
     let (language, config) = language_and_configuration(&loader, scope)?;
-    let config = highlight_config(language, config, scope)?;
-    let highlights = highlights(code, config, &loader)?;
-    let inline_css_styles = theme
+    let highlight_config = highlight_configuration(language, config, scope)?;
+    let highlights = highlights(code, highlight_config, &loader)?;
+    let inline_css_attributes = theme
         .styles
         .into_iter()
         .map(|s| s.css)
         .map(Option::unwrap_or_default)
         .collect::<Vec<_>>();
-    render_html(code, highlights, &inline_css_styles)
+    render_html(code, highlights, &inline_css_attributes)
 }
 
 fn loader(parser_directory: PathBuf, highlight_names: &Vec<String>) -> Result<Loader> {
@@ -44,8 +44,8 @@ fn loader(parser_directory: PathBuf, highlight_names: &Vec<String>) -> Result<Lo
             Ok(loader)
         })
         .with_context(|| {
-            let parser_directory_string = parser_directory.display();
-            format!("{LOADER_ERROR_MSG} '{parser_directory_string}'")
+            let parser_directory_str = parser_directory.display();
+            format!("{LOADER_ERROR_MSG} '{parser_directory_str}'")
         })
 }
 
@@ -61,7 +61,7 @@ fn language_and_configuration<'a>(
         .with_context(|| format!("{NO_LANGUAGE_ERROR_MSG} '{scope}'"))
 }
 
-fn highlight_config<'a>(
+fn highlight_configuration<'a>(
     language: Language,
     config: &'a LanguageConfiguration<'a>,
     scope: &'a str,
@@ -90,17 +90,17 @@ fn highlights(
 fn render_html(
     code: &str,
     highlights: impl Iterator<Item = Result<HighlightEvent, TSError>>,
-    css_attributes: &[String],
+    html_attributes: &[String],
 ) -> Result<String> {
-    let css_attribute_callback = |h: Highlight| {
-        css_attributes
+    let html_attribute_callback = |h: Highlight| {
+        html_attributes
             .get(h.0)
             .map(String::as_str)
             .unwrap_or_default()
             .as_bytes()
     };
     let mut renderer = HtmlRenderer::new();
-    renderer.render(highlights, code.as_bytes(), &css_attribute_callback)?;
+    renderer.render(highlights, code.as_bytes(), &html_attribute_callback)?;
     // Remove erroneously appended newline
     if renderer.html.ends_with(&[b'\n']) && !code.ends_with('\n') {
         renderer.html.pop();
