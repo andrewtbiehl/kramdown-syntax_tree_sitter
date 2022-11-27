@@ -18,7 +18,7 @@ pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, S
 fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<String> {
     let parsers_dir = PathBuf::from(parsers_dir);
     let theme = Theme::default();
-    let mut loader = Loader::new_from_dir(parsers_dir)?;
+    let mut loader = loader(parsers_dir)?;
     loader.configure_highlights(&theme.highlight_names);
     let (language, config) = language_and_configuration(&loader, scope)?;
     let config = highlight_config(language, config, scope)?;
@@ -32,27 +32,21 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     render_html(highlights, code, &inline_css_styles)
 }
 
-trait LoaderExt {
-    fn new_from_dir(parser_directory: PathBuf) -> Result<Loader>;
-}
-
-impl LoaderExt for Loader {
-    fn new_from_dir(parser_directory: PathBuf) -> Result<Loader> {
-        Loader::new()
-            .and_then(|mut loader| {
-                let config = {
-                    let parser_directory = parser_directory.clone();
-                    let parser_directories = vec![parser_directory];
-                    Config { parser_directories }
-                };
-                loader.find_all_languages(&config)?;
-                Ok(loader)
-            })
-            .with_context(|| {
-                let parser_directory_string = parser_directory.display();
-                format!("{LOADER_ERROR_MSG} '{parser_directory_string}'")
-            })
-    }
+fn loader(parser_directory: PathBuf) -> Result<Loader> {
+    Loader::new()
+        .and_then(|mut loader| {
+            let config = {
+                let parser_directory = parser_directory.clone();
+                let parser_directories = vec![parser_directory];
+                Config { parser_directories }
+            };
+            loader.find_all_languages(&config)?;
+            Ok(loader)
+        })
+        .with_context(|| {
+            let parser_directory_string = parser_directory.display();
+            format!("{LOADER_ERROR_MSG} '{parser_directory_string}'")
+        })
 }
 
 fn language_and_configuration<'a>(
