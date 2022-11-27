@@ -104,6 +104,15 @@ fn render_html(
     Ok(renderer.lines().collect())
 }
 
+fn inline_css_attributes(theme: Theme) -> Vec<String> {
+    theme
+        .styles
+        .into_iter()
+        .map(|s| s.css)
+        .map(Option::unwrap_or_default)
+        .collect()
+}
+
 fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<String> {
     let parsers_dir = PathBuf::from(parsers_dir);
     let theme = Theme::default();
@@ -111,13 +120,7 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     let (language, config) = language_and_configuration(&loader, scope)?;
     let highlight_config = highlight_configuration(language, config, scope)?;
     let highlights = highlights(code, highlight_config, &loader)?;
-    let inline_css_attributes = theme
-        .styles
-        .into_iter()
-        .map(|s| s.css)
-        .map(Option::unwrap_or_default)
-        .collect::<Vec<_>>();
-    render_html(code, highlights, &inline_css_attributes)
+    render_html(code, highlights, &inline_css_attributes(theme))
 }
 
 pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, String> {
