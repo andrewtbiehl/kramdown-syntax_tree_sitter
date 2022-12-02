@@ -1,7 +1,9 @@
 use anyhow::{Context, Result};
+use std::collections::HashMap;
 use std::convert;
 use std::path::PathBuf;
 use tree_sitter::Language;
+use tree_sitter_cli::highlight::Style;
 use tree_sitter_cli::highlight::Theme;
 use tree_sitter_highlight::{Error as TSError, HighlightEvent};
 use tree_sitter_highlight::{Highlight, HighlightConfiguration, Highlighter, HtmlRenderer};
@@ -103,24 +105,41 @@ fn render_html(
     Ok(renderer.lines().collect())
 }
 
-fn inline_css_attributes(theme: Theme) -> Vec<String> {
+fn highlight_names(scope: &str, loader: &Loader) -> Result<Vec<String>> {
+    let (language, config) = language_and_configuration(loader, scope)?;
+    let highlight_config = highlight_configuration(language, config, scope)?;
+    Ok(highlight_config.names().iter().map(String::from).collect())
+}
+
+fn highlight_name_styles() -> HashMap<String, Style> {
+    let theme = Theme::default();
     theme
-        .styles
+        .highlight_names
         .into_iter()
-        .map(|s| s.css)
+        .zip(theme.styles.into_iter())
+        .collect()
+}
+
+fn inline_css_attributes(highlight_names: &[String]) -> Vec<String> {
+    let highlight_name_styles = highlight_name_styles();
+    highlight_names
+        .iter()
+        .map(|n| highlight_name_styles.get(n))
+        .map(|o| o.and_then(|style| style.css.as_ref()))
+        .map(|o| o.map(String::from))
         .map(Option::unwrap_or_default)
         .collect()
 }
 
 fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<String> {
     let parsers_dir = PathBuf::from(parsers_dir);
-    let theme = Theme::default();
     let mut loader = loader(parsers_dir)?;
-    loader.configure_highlights(&theme.highlight_names);
+    let highlight_names = highlight_names(scope, &loader)?;
+    loader.configure_highlights(&highlight_names);
     let (language, config) = language_and_configuration(&loader, scope)?;
     let highlight_config = highlight_configuration(language, config, scope)?;
     let highlights = highlights(code, highlight_config, &loader)?;
-    render_html(code, highlights, &inline_css_attributes(theme))
+    render_html(code, highlights, &inline_css_attributes(&highlight_names))
 }
 
 pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, String> {
