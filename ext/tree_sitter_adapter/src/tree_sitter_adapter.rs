@@ -21,7 +21,7 @@ impl<T, E> ResultExt<T, E> for Result<Result<T, E>, E> {
     }
 }
 
-fn loader(parser_directory: PathBuf, highlight_names: &Vec<String>) -> Result<Loader> {
+fn loader(parser_directory: PathBuf) -> Result<Loader> {
     Loader::new()
         .and_then(|mut loader| {
             let config = {
@@ -30,7 +30,6 @@ fn loader(parser_directory: PathBuf, highlight_names: &Vec<String>) -> Result<Lo
                 Config { parser_directories }
             };
             loader.find_all_languages(&config)?;
-            loader.configure_highlights(highlight_names);
             Ok(loader)
         })
         .with_context(|| {
@@ -116,7 +115,8 @@ fn inline_css_attributes(theme: Theme) -> Vec<String> {
 fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<String> {
     let parsers_dir = PathBuf::from(parsers_dir);
     let theme = Theme::default();
-    let loader = loader(parsers_dir, &theme.highlight_names)?;
+    let mut loader = loader(parsers_dir)?;
+    loader.configure_highlights(&theme.highlight_names);
     let (language, config) = language_and_configuration(&loader, scope)?;
     let highlight_config = highlight_configuration(language, config, scope)?;
     let highlights = highlights(code, highlight_config, &loader)?;
