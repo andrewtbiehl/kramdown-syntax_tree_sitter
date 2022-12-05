@@ -178,6 +178,36 @@ block will only be correctly highlighted if the language identifier provided for
 code block is its language's corresponding Tree-sitter scope string. This is illustrated
 by the code block used in the [Quickstart](#quickstart) example.
 
+### CSS styling
+
+Code highlights are rendered via inline CSS styles, which are applied to each token in
+the parsed code. These styles are derived from Tree-sitter's built-in default
+highlighting theme, repeated here for convenience:
+
+| Token name | CSS style |
+| :-- | :-- |
+| attribute | `color: #af0000; font-style: italic;` |
+| comment | `color: #8a8a8a; font-style: italic;` |
+| constant | `color: #875f00;` |
+| function | `color: o#005fd7;` |
+| function.builtin | `color: #005fd7; font-weight: bold;` |
+| keyword | `color: #5f00d7;` |
+| operator | `color: #4e4e4e; font-weight: bold;` |
+| property | `color: #af0000;` |
+| string | `color: #008700;` |
+| string.special | `color: #008787;` |
+| tag | `color: #000087;` |
+| type | `color: #005f5f;` |
+| type.builtin | `color: #005f5f; font-weight: bold;` |
+| variable.builtin | `font-weight: bold;` |
+| variable.parameter | `text-decoration: underline;` |
+| constant.builtin, number | `color: #875f00; font-weight: bold;` |
+| constructor, module | `color: #af8700;` |
+| punctuation.bracket, punctuation.delimiter | `color: #4e4e4e;` |
+
+Any and all token types not represented in this default theme are consequently not
+highlighted.
+
 ### Configuration
 
 This Kramdown plugin currently supports the following options when provided as sub-keys
