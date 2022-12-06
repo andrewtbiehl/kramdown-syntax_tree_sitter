@@ -213,9 +213,9 @@ highlighted.
 This Kramdown plugin currently supports the following options when provided as sub-keys
 of the Kramdown option `syntax_highlighter_opts`:
 
-| Key | Description | Default value |
-| :-- | :-- | :-- |
-| `tree_sitter_parsers_dir` | The path to the Tree-sitter language parsers directory. | `~/tree_sitter_parsers` |
+| Key | Description | Type | Default value |
+| :-- | :-- | :-- | :-- |
+| `tree_sitter_parsers_dir` | The path to the Tree-sitter language parsers directory. | String | `~/tree_sitter_parsers` |
 
 ## Contributing
 
