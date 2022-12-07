@@ -20,7 +20,7 @@ module Kramdown
             raw_text,
             get_parsers_dir(converter),
             language,
-            false
+            get_use_css_classes(converter)
           )
           # Code blocks are additionally wrapped in HTML code tags
           type == :block ? "<pre><code>#{rendered_text}</code></pre>" : rendered_text
@@ -30,6 +30,10 @@ module Kramdown
           File.expand_path(
             get_option(converter, :tree_sitter_parsers_dir) || DEFAULT_PARSERS_DIR
           )
+        end
+
+        def self.get_use_css_classes(converter)
+          get_option(converter, :css_classes) || false
         end
 
         def self.get_option(converter, name)

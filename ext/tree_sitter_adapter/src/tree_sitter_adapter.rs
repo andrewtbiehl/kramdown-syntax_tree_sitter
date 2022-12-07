@@ -131,11 +131,19 @@ fn inline_css_attributes(highlight_names: &[String]) -> Vec<String> {
         .collect()
 }
 
+fn css_class_attributes(highlight_names: &[String]) -> Vec<String> {
+    highlight_names
+        .iter()
+        .map(|s| s.replace('.', "-"))
+        .map(|s| format!("class='ts-{s}'"))
+        .collect()
+}
+
 fn highlight_adapter(
     code: &str,
     parsers_dir: &str,
     scope: &str,
-    _css_classes: bool,
+    css_classes: bool,
 ) -> Result<String> {
     let parsers_dir = PathBuf::from(parsers_dir);
     let mut loader = loader(parsers_dir)?;
@@ -144,7 +152,11 @@ fn highlight_adapter(
     let (language, config) = language_and_configuration(&loader, scope)?;
     let highlight_config = highlight_configuration(language, config, scope)?;
     let highlights = highlights(code, highlight_config, &loader)?;
-    render_html(code, highlights, &inline_css_attributes(&highlight_names))
+    let html_attributes = match css_classes {
+        true => css_class_attributes,
+        false => inline_css_attributes,
+    }(&highlight_names);
+    render_html(code, highlights, &html_attributes)
 }
 
 pub fn highlight(

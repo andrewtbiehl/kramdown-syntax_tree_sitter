@@ -16,6 +16,12 @@ PYTHON_TREE_SITTER_MARKDOWN = <<~MARKDOWN
   ~~~
 MARKDOWN
 
+PYTHON_TREE_SITTER_ESCAPE_CHARACTER_MARKDOWN = <<~MARKDOWN
+  ~~~source.python
+  print("The newline character ('\\n') is an important control character.")
+  ~~~
+MARKDOWN
+
 HTML_TREE_SITTER_MARKDOWN = <<~MARKDOWN
   ~~~text.html.basic
   <strong>The ampersand ('&amp;') should be HTML escaped.</strong>
@@ -59,6 +65,23 @@ PYTHON_TREE_SITTER_HTML = <<~HTML
   <div class="language-source.python highlighter-tree-sitter"><pre><code>\
   <span style='font-weight: bold;color: #005fd7'>print</span>(\
   <span style='color: #008700'>&#39;Hello, World!&#39;</span>)
+  </code></pre></div>
+HTML
+
+PYTHON_TREE_SITTER_INLINE_CSS_HTML = <<~HTML
+  <div class="language-source.python highlighter-tree-sitter"><pre><code>\
+  <span style='font-weight: bold;color: #005fd7'>print</span>(\
+  <span style='color: #008700'>&quot;The newline character \
+  (&#39;<span>\\n</span>&#39;) is an important control character.&quot;</span>)
+  </code></pre></div>
+HTML
+
+PYTHON_TREE_SITTER_CSS_CLASS_HTML = <<~HTML
+  <div class="language-source.python highlighter-tree-sitter"><pre><code>\
+  <span class='ts-function-builtin'>print</span>(\
+  <span class='ts-string'>&quot;The newline character \
+  (&#39;<span class='ts-escape'>\\n</span>&#39;) is an important control \
+  character.&quot;</span>)
   </code></pre></div>
 HTML
 
@@ -139,6 +162,26 @@ module Kramdown
       )
 
       assert_equal PYTHON_TREE_SITTER_HTML, actual
+    end
+
+    def test_that_it_can_use_tree_sitter_inline_css_highlighting
+      actual = convert_to_html(
+        PYTHON_TREE_SITTER_ESCAPE_CHARACTER_MARKDOWN,
+        :'tree-sitter',
+        { tree_sitter_parsers_dir: REAL_PARSERS_PATH, css_classes: false }
+      )
+
+      assert_equal PYTHON_TREE_SITTER_INLINE_CSS_HTML, actual
+    end
+
+    def test_that_it_can_use_tree_sitter_css_class_highlighting
+      actual = convert_to_html(
+        PYTHON_TREE_SITTER_ESCAPE_CHARACTER_MARKDOWN,
+        :'tree-sitter',
+        { tree_sitter_parsers_dir: REAL_PARSERS_PATH, css_classes: true }
+      )
+
+      assert_equal PYTHON_TREE_SITTER_CSS_CLASS_HTML, actual
     end
 
     def test_that_it_can_use_tree_sitter_inline_highlighting

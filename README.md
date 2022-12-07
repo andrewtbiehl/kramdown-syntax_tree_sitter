@@ -180,9 +180,14 @@ by the code block used in the [Quickstart](#quickstart) example.
 
 ### CSS styling
 
-Code highlights are rendered via inline CSS styles, which are applied to each token in
-the parsed code. These styles are derived from Tree-sitter's built-in default
-highlighting theme, repeated here for convenience:
+Code highlights can be rendered either via inline CSS styles or via CSS classes, which
+are applied to each token in the parsed code.
+
+To use CSS classes for highlighting, set the `css_classes` Kramdown syntax-highlighting
+option to `true`. Otherwise, the plugin will apply highlights via inline CSS styles.
+
+The inline CSS styles are derived from Tree-sitter's built-in default highlighting
+theme, repeated here for convenience:
 
 | Token name | CSS style |
 | :-- | :-- |
@@ -206,7 +211,15 @@ highlighting theme, repeated here for convenience:
 | punctuation.bracket, punctuation.delimiter | `color: #4e4e4e;` |
 
 Any and all token types not represented in this default theme are consequently not
-highlighted.
+highlighted when using the inline CSS styles option.
+
+The CSS class names are derived directly from Tree-sitter token names by replacing all
+full stops ('.') with dashes ('-') and adding the prefix 'ts-'. For example, the CSS
+class for 'function.builtin' tokens is 'ts-function-builtin'. The use of CSS classes
+allows for customization of highlighting styles, including the ability to highlight more
+token types than with the default inline CSS method. Of course, this also requires that
+an externally created CSS stylesheet defining the style for each token type is provided
+whenever the Kramdown-generated HTML is rendered.
 
 ### Configuration
 
@@ -216,6 +229,7 @@ of the Kramdown option `syntax_highlighter_opts`:
 | Key | Description | Type | Default value |
 | :-- | :-- | :-- | :-- |
 | `tree_sitter_parsers_dir` | The path to the Tree-sitter language parsers directory. | String | `~/tree_sitter_parsers` |
+| `css_classes` | Whether to use CSS classes for highlights. | Boolean | `false` |
 
 ## Contributing
 

@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 <!-- For new features -->
 
+- Added the option to highlight code via CSS classes instead of via inline CSS.
+
 ### Changed
 <!-- For changes in existing functionality -->
 
