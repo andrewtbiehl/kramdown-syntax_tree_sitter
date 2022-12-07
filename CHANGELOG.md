@@ -10,14 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 <!-- For new features -->
 
-- Added the option to highlight code via CSS classes instead of via inline CSS.
-
 ### Changed
 <!-- For changes in existing functionality -->
-
-- Improved the error message for missing highlight configuration errors.
-- Significantly refactored the internal Rust implementation. No known behavior changes
-  were introduced as part of this refactor.
 
 ### Deprecated
 <!-- For soon-to-be removed features -->
@@ -31,6 +25,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 <!-- In case of vulnerabilities -->
 
+## [0.2.0] - 2022-12-07
+
+### Added
+
+- Added the option to highlight code via CSS classes instead of via inline CSS.
+
+### Changed
+
+- Improved the error message for missing highlight configuration errors.
+- Significantly refactored the internal Rust implementation. No known behavior changes
+  were introduced as part of this refactor.
+
 ## [0.1.0] - 2022-11-11
 
 ### Added
@@ -38,5 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This is a syntax highlighter plugin for Kramdown that leverages Tree-sitter's native
   syntax highlighter to highlight code blocks (and spans) when rendering HTML.
 
-[unreleased]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/releases/tag/v0.1.0
