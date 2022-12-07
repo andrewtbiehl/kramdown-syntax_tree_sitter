@@ -131,7 +131,12 @@ fn inline_css_attributes(highlight_names: &[String]) -> Vec<String> {
         .collect()
 }
 
-fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<String> {
+fn highlight_adapter(
+    code: &str,
+    parsers_dir: &str,
+    scope: &str,
+    _css_classes: bool,
+) -> Result<String> {
     let parsers_dir = PathBuf::from(parsers_dir);
     let mut loader = loader(parsers_dir)?;
     let highlight_names = highlight_names(scope, &loader)?;
@@ -142,6 +147,11 @@ fn highlight_adapter(code: &str, parsers_dir: &str, scope: &str) -> Result<Strin
     render_html(code, highlights, &inline_css_attributes(&highlight_names))
 }
 
-pub fn highlight(code: &str, parsers_dir: &str, scope: &str) -> Result<String, String> {
-    highlight_adapter(code, parsers_dir, scope).map_err(|e| format!("{e:#}"))
+pub fn highlight(
+    code: &str,
+    parsers_dir: &str,
+    scope: &str,
+    css_classes: bool,
+) -> Result<String, String> {
+    highlight_adapter(code, parsers_dir, scope, css_classes).map_err(|e| format!("{e:#}"))
 }

@@ -19,7 +19,8 @@ module Kramdown
           rendered_text = TreeSitterAdapter.highlight(
             raw_text,
             get_parsers_dir(converter),
-            language
+            language,
+            false
           )
           # Code blocks are additionally wrapped in HTML code tags
           type == :block ? "<pre><code>#{rendered_text}</code></pre>" : rendered_text
