@@ -1,6 +1,6 @@
 # Kramdown Tree-sitter Highlighter
 
-[![Build status](https://img.shields.io/github/workflow/status/andrewtbiehl/kramdown-syntax_tree_sitter/Quality%20Control?style=flat-square&logo=github)](https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/actions/workflows/quality-control.yml)
+[![Build status](https://img.shields.io/github/actions/workflow/status/andrewtbiehl/kramdown-syntax_tree_sitter/quality-control.yml?branch=main&style=flat-square&logo=github)](https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/actions/workflows/quality-control.yml)
 [![RubyGems page](https://img.shields.io/gem/v/kramdown-syntax_tree_sitter?style=flat-square&color=blue&logo=rubygems&logoColor=white)](https://rubygems.org/gems/kramdown-syntax_tree_sitter)
 
 ***Syntax highlight code with [Tree-sitter](https://tree-sitter.github.io/tree-sitter)
