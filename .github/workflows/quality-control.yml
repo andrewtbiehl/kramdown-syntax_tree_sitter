@@ -30,7 +30,7 @@ jobs:
           rustup install --profile minimal ${{matrix.rust-version}}
           rustup default ${{matrix.rust-version}}
       - name: Restore Rust package Cache
-        uses: actions/cache@v3.0.11
+        uses: actions/cache@v3.2.0
         with:
           key: ${{matrix.os}}-${{matrix.rust-version}}-${{hashFiles('**/Cargo.lock')}}
           path: |
