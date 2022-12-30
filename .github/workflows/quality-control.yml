@@ -12,7 +12,7 @@ jobs:
       matrix:
         os: [ubuntu-20.04, ubuntu-22.04, macos-11, macos-12]
         ruby-version: ['2.7', '3.0', '3.1']
-        rust-version: ['1.61', '1.62', '1.63', '1.64', '1.65']
+        rust-version: ['1.61', '1.62', '1.63', '1.64', '1.65', '1.66']
     steps:
       - name: Checkout project
         with:
