@@ -22,7 +22,7 @@ essentially an adapter for the
 hence also requires a compatible [Rust](https://www.rust-lang.org) installation to
 function. It is officially compatible with the following environments:
 
-- **Ruby**: 2.7, 3.0, 3.1
+- **Ruby**: 2.7, 3.0, 3.1, 3.2
 - **Rust**: 1.62, 1.63, 1.64, 1.65, 1.66
 - **Platforms**: MacOS, Linux
 

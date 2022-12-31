@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- For new features -->
 
 - Added testing support for Rust version 1.66.
+- Added testing support for Ruby version 3.2.
 
 ### Changed
 <!-- For changes in existing functionality -->
