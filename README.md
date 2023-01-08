@@ -64,6 +64,14 @@ MARKDOWN
 Kramdown::Document.new(text, syntax_highlighter: :'tree-sitter').to_html
 ```
 
+### General usage
+
+To successfully highlight input text via Kramdown with this plugin enabled, make sure
+that every language identifier is expressed with the correct Tree-sitter scope and that
+every language referenced has a corresponding Tree-sitter parser library installed. See
+the subsequent ['Language identifiers'](#language-identifiers) and
+['Tree-sitter parsers'](#tree-sitter-parsers) sections for more information.
+
 ### Usage with Jekyll
 
 This plugin can be used with the popular static site generator
@@ -82,11 +90,9 @@ kramdown:
   # Other Kramdown options...
 ```
 
-To highlight every code block in a Jekyll project via the plugin, make sure that every
-language identifier is expressed with the correct Tree-sitter scope and that every
-language referenced has a corresponding Tree-sitter parser library installed. See the
-subsequent ['Language identifiers'](#language-identifiers) and
-['Tree-sitter parsers'](#tree-sitter-parsers) sections for more information.
+Note that this plugin's general usage prerequisites (described in the previous
+['General usage'](#general-usage) section) still apply when using this plugin with
+Jekyll.
 
 Also, there are multiple ways to render highlighted code blocks with Jekyll, as
 illustrated in the following table:
