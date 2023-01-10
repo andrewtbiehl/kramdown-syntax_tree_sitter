@@ -119,6 +119,13 @@ NO_LANGUAGE_TREE_SITTER_INLINE_HTML = <<~HTML
   escaped.&lt;/strong&gt;</code> is not highlighted.</p>
 HTML
 
+PYTHON_TREE_SITTER_ROUGE_IDENTIFIER_HTML = <<~HTML
+  <div class="language-python highlighter-tree-sitter"><pre><code>\
+  <span style='font-weight: bold;color: #005fd7'>print</span>(\
+  <span style='color: #008700'>&#39;Hello, World!&#39;</span>)
+  </code></pre></div>
+HTML
+
 PYTHON_MISSING_LANGUAGE_PARSER_MSG = 'Error retrieving language configuration for ' \
                                      "scope 'source.python': Language not found"
 
@@ -245,6 +252,16 @@ module Kramdown
 
       assert_instance_of RuntimeError, actual
       assert_equal PYTHON_MISSING_LANGUAGE_PARSER_MSG, actual.message
+    end
+
+    def test_that_it_can_use_tree_sitter_highlighting_with_rouge_identifiers
+      actual = convert_to_html(
+        PYTHON_STANDARD_MARKDOWN,
+        :'tree-sitter',
+        { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
+      )
+
+      assert_equal PYTHON_TREE_SITTER_ROUGE_IDENTIFIER_HTML, actual
     end
   end
 end

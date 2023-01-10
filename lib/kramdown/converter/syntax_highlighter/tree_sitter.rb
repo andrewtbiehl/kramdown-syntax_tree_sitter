@@ -3,6 +3,8 @@
 require 'kramdown'
 require 'tree_sitter_adapter'
 
+require_relative '../../syntax_tree_sitter/languages'
+
 module Kramdown
   module Converter # rubocop:disable Style/Documentation
     module SyntaxHighlighter
@@ -13,13 +15,14 @@ module Kramdown
       module TreeSitter
         DEFAULT_PARSERS_DIR = '~/tree_sitter_parsers'
 
-        def self.call(converter, raw_text, language, type, _)
-          return nil unless language
+        def self.call(converter, raw_text, language_alias, type, _)
+          return nil unless language_alias
 
+          language_scope = LANGUAGE_SCOPES.fetch(language_alias, language_alias)
           rendered_text = TreeSitterAdapter.highlight(
             raw_text,
             get_parsers_dir(converter),
-            language,
+            language_scope,
             get_use_css_classes(converter)
           )
           # Code blocks are additionally wrapped in HTML code tags

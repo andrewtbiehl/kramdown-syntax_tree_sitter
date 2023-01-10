@@ -56,7 +56,7 @@ require 'kramdown'
 require 'kramdown/syntax_tree_sitter'
 
 text = <<~MARKDOWN
-  ~~~source.python
+  ~~~python
   print('Hello, World!')
   ~~~
 MARKDOWN
@@ -67,9 +67,8 @@ Kramdown::Document.new(text, syntax_highlighter: :'tree-sitter').to_html
 ### General usage
 
 To successfully highlight input text via Kramdown with this plugin enabled, make sure
-that every language identifier is expressed with the correct Tree-sitter scope and that
-every language referenced has a corresponding Tree-sitter parser library installed. See
-the subsequent ['Language identifiers'](#language-identifiers) and
+that every language referenced has a corresponding Tree-sitter parser library installed.
+See the subsequent ['Language identifiers'](#language-identifiers) and
 ['Tree-sitter parsers'](#tree-sitter-parsers) sections for more information.
 
 ### Usage with Jekyll
@@ -109,13 +108,13 @@ illustrated in the following table:
 
 ---
 ````
-```source.python
+```python
 print('Hello, World!')
 ```
 
 or
 
-~~~source.python
+~~~python
 print('Hello, World!')
 ~~~
 ````
@@ -131,7 +130,7 @@ print('Hello, World!')
 ---
 ```
     print('Hello, World!')
-{: class="language-source.python" }
+{: class="language-python" }
 ```
 ---
 
@@ -144,7 +143,7 @@ print('Hello, World!')
 
 ---
 ```
-{% highlight source.python %}
+{% highlight python %}
 print('Hello, World!')
 {% endhighlight %}
 ```
@@ -177,12 +176,18 @@ can be found on
 
 ### Language identifiers
 
-Tree-sitter uses a string-based identifier called a 'scope' to identify each language.
-For example, the scope string for Python is 'source.python', whereas for HTML it is
-'text.html.basic'. Currently, this plugin follows this same convention, so a given code
-block will only be correctly highlighted if the language identifier provided for that
-code block is its language's corresponding Tree-sitter scope string. This is illustrated
-by the code block used in the [Quickstart](#quickstart) example.
+For most popular languages, this plugin recognizes the same language identifiers as used
+by the popular highlighter [Rouge](https://github.com/rouge-ruby/rouge). For example,
+both 'python' and 'py' may be used to identify a code block written in Python. For the
+complete list of Rouge language identifiers recognized by this plugin, see
+[`lib/kramdown/syntax_tree_sitter/languages.rb`](https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/blob/main/lib/kramdown/syntax_tree_sitter/languages.rb).
+
+This plugin also automatically supports the language identifier format used by
+Tree-sitter, known as as the 'scope' name. For example, the scope name for Python is
+'source.python', whereas for HTML it is 'text.html.basic'.
+
+For any identifiers currently supported by Rouge but not by this plugin, feel free to
+open an issue or pull request on GitHub to have them included.
 
 ### CSS styling
 
