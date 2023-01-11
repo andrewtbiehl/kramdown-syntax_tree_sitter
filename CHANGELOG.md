@@ -10,15 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 <!-- For new features -->
 
-- Added testing support for Rust version 1.66.
-- Added testing support for Ruby version 3.2.
-- Added support for Rouge language identifiers.
-
 ### Changed
 <!-- For changes in existing functionality -->
-
-- Bumped the Rust dependency '[Anyhow](https://crates.io/crates/anyhow)' from version
-  1.0.66 to 1.0.68.
 
 ### Deprecated
 <!-- For soon-to-be removed features -->
@@ -26,13 +19,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 <!-- For now removed features -->
 
-- Removed testing support for Rust version 1.61.
-
 ### Fixed
 <!-- For any bug fixes -->
 
 ### Security
 <!-- In case of vulnerabilities -->
+
+## [0.3.0] - 2023-01-11
+
+### Added
+
+- Added testing support for Rust version 1.66.
+- Added testing support for Ruby version 3.2.
+- Added support for Rouge language identifiers.
+
+### Changed
+
+- Bumped the Rust dependency '[Anyhow](https://crates.io/crates/anyhow)' from version
+  1.0.66 to 1.0.68.
+
+### Removed
+
+- Removed testing support for Rust version 1.61.
 
 ## [0.2.0] - 2022-12-07
 
@@ -53,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This is a syntax highlighter plugin for Kramdown that leverages Tree-sitter's native
   syntax highlighter to highlight code blocks (and spans) when rendering HTML.
 
-[unreleased]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.2.0...HEAD
+[unreleased]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/releases/tag/v0.1.0

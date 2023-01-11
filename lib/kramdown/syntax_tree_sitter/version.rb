@@ -5,7 +5,7 @@ module Kramdown
     module SyntaxHighlighter
       module TreeSitter
         # Version of kramdown-syntax_tree_sitter gem
-        VERSION = '0.2.0'
+        VERSION = '0.3.0'
       end
     end
   end
