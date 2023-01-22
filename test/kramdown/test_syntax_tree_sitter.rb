@@ -4,127 +4,56 @@ require 'kramdown'
 require 'kramdown/syntax_tree_sitter'
 require 'minitest/autorun'
 
-PYTHON_STANDARD_MARKDOWN = <<~MARKDOWN
-  ~~~python
-  print('Hello, World!')
-  ~~~
-MARKDOWN
+TEST_FILES_DIRECTORY_PATH = File.join __dir__, '..', 'test_files'
 
-PYTHON_TREE_SITTER_MARKDOWN = <<~MARKDOWN
-  ~~~source.python
-  print('Hello, World!')
-  ~~~
-MARKDOWN
+# Helper function for reading test input data from a file
+def read_test_file(filename)
+  full_path = File.join TEST_FILES_DIRECTORY_PATH, filename
+  File.read full_path
+end
 
-PYTHON_TREE_SITTER_ESCAPE_CHARACTER_MARKDOWN = <<~MARKDOWN
-  ~~~source.python
-  print("The newline character ('\\n') is an important control character.")
-  ~~~
-MARKDOWN
+PYTHON_STANDARD_MARKDOWN = read_test_file 'python_standard.md'
 
-HTML_TREE_SITTER_MARKDOWN = <<~MARKDOWN
-  ~~~text.html.basic
-  <strong>The ampersand ('&amp;') should be HTML escaped.</strong>
-  ~~~
-MARKDOWN
+PYTHON_TREE_SITTER_MARKDOWN = read_test_file 'python_tree_sitter.md'
 
-PYTHON_TREE_SITTER_INLINE_MARKDOWN = <<~MARKDOWN
-  The code `print('Hello, World!')`{: class="language-source.python" } is valid Python.
-MARKDOWN
+PYTHON_TREE_SITTER_ESCAPE_CHARACTER_MARKDOWN = \
+  read_test_file 'python_tree_sitter_escape_character.md'
 
-BAD_SYNTAX_PYTHON_TREE_SITTER_MARKDOWN = <<~MARKDOWN
-  ~~~source.python
-  print('Hello, World!''"))
-  ~~~
-MARKDOWN
+HTML_TREE_SITTER_MARKDOWN = read_test_file 'html_tree_sitter.md'
 
-NO_LANGUAGE_TREE_SITTER_MARKDOWN = <<~MARKDOWN
-  ~~~
-  <strong>The ampersand ('&amp;') should be HTML escaped.</strong>
-  ~~~
-MARKDOWN
+PYTHON_TREE_SITTER_INLINE_MARKDOWN = read_test_file 'python_tree_sitter_inline.md'
 
-NO_LANGUAGE_TREE_SITTER_INLINE_MARKDOWN = <<~MARKDOWN
-  The code `<strong>The ampersand ('&amp;') should be HTML escaped.</strong>` is not \
-  highlighted.
-MARKDOWN
+BAD_SYNTAX_PYTHON_TREE_SITTER_MARKDOWN = \
+  read_test_file 'bad_syntax_python_tree_sitter.md'
 
-PYTHON_NO_HIGHLIGHT_HTML = <<~HTML
-  <pre><code class="language-python">print('Hello, World!')
-  </code></pre>
-HTML
+NO_LANGUAGE_TREE_SITTER_MARKDOWN = read_test_file 'no_language_tree_sitter.md'
 
-PYTHON_ROUGE_HTML = <<~HTML
-  <div class="language-python highlighter-rouge"><div class="highlight">\
-  <pre class="highlight"><code><span class="k">print</span><span class="p">(</span>\
-  <span class="s">'Hello, World!'</span><span class="p">)</span>
-  </code></pre></div></div>
-HTML
+NO_LANGUAGE_TREE_SITTER_INLINE_MARKDOWN = \
+  read_test_file 'no_language_tree_sitter_inline.md'
 
-PYTHON_TREE_SITTER_HTML = <<~HTML
-  <div class="language-source.python highlighter-tree-sitter"><pre><code>\
-  <span style='font-weight: bold;color: #005fd7'>print</span>(\
-  <span style='color: #008700'>&#39;Hello, World!&#39;</span>)
-  </code></pre></div>
-HTML
+PYTHON_NO_HIGHLIGHT_HTML = read_test_file 'python_no_highlight.html'
 
-PYTHON_TREE_SITTER_INLINE_CSS_HTML = <<~HTML
-  <div class="language-source.python highlighter-tree-sitter"><pre><code>\
-  <span style='font-weight: bold;color: #005fd7'>print</span>(\
-  <span style='color: #008700'>&quot;The newline character \
-  (&#39;<span>\\n</span>&#39;) is an important control character.&quot;</span>)
-  </code></pre></div>
-HTML
+PYTHON_ROUGE_HTML = read_test_file 'python_rouge.html'
 
-PYTHON_TREE_SITTER_CSS_CLASS_HTML = <<~HTML
-  <div class="language-source.python highlighter-tree-sitter"><pre><code>\
-  <span class='ts-function-builtin'>print</span>(\
-  <span class='ts-string'>&quot;The newline character \
-  (&#39;<span class='ts-escape'>\\n</span>&#39;) is an important control \
-  character.&quot;</span>)
-  </code></pre></div>
-HTML
+PYTHON_TREE_SITTER_HTML = read_test_file 'python_tree_sitter.html'
 
-PYTHON_TREE_SITTER_INLINE_HTML = <<~HTML
-  <p>The code <code class="language-source.python highlighter-tree-sitter">\
-  <span style='font-weight: bold;color: #005fd7'>print</span>(\
-  <span style='color: #008700'>&#39;Hello, World!&#39;</span>)\
-  </code> is valid Python.</p>
-HTML
+PYTHON_TREE_SITTER_INLINE_CSS_HTML = read_test_file 'python_tree_sitter_inline_css.html'
 
-HTML_TREE_SITTER_HTML = <<~HTML
-  <div class="language-text.html.basic highlighter-tree-sitter"><pre><code>\
-  <span style='color: #4e4e4e'>&lt;</span><span style='color: #000087'>strong</span>\
-  <span style='color: #4e4e4e'>&gt;</span>The ampersand (&#39;&amp;amp;&#39;) should \
-  be HTML escaped.<span style='color: #4e4e4e'>&lt;/</span>\
-  <span style='color: #000087'>strong</span><span style='color: #4e4e4e'>&gt;</span>
-  </code></pre></div>
-HTML
+PYTHON_TREE_SITTER_CSS_CLASS_HTML = read_test_file 'python_tree_sitter_css_class.html'
 
-BAD_SYNTAX_PYTHON_TREE_SITTER_HTML = <<~HTML
-  <div class="language-source.python highlighter-tree-sitter"><pre><code>\
-  <span style='font-weight: bold;color: #005fd7'>print</span>(\
-  <span style='color: #008700'>&#39;Hello, World!&#39;</span>&#39;&quot;))
-  </code></pre></div>
-HTML
+PYTHON_TREE_SITTER_INLINE_HTML = read_test_file 'python_tree_sitter_inline.html'
 
-NO_LANGUAGE_TREE_SITTER_HTML = <<~HTML
-  <pre><code>&lt;strong&gt;The ampersand ('&amp;amp;') should be HTML \
-  escaped.&lt;/strong&gt;
-  </code></pre>
-HTML
+HTML_TREE_SITTER_HTML = read_test_file 'html_tree_sitter.html'
 
-NO_LANGUAGE_TREE_SITTER_INLINE_HTML = <<~HTML
-  <p>The code <code>&lt;strong&gt;The ampersand ('&amp;amp;') should be HTML \
-  escaped.&lt;/strong&gt;</code> is not highlighted.</p>
-HTML
+BAD_SYNTAX_PYTHON_TREE_SITTER_HTML = read_test_file 'bad_syntax_python_tree_sitter.html'
 
-PYTHON_TREE_SITTER_ROUGE_IDENTIFIER_HTML = <<~HTML
-  <div class="language-python highlighter-tree-sitter"><pre><code>\
-  <span style='font-weight: bold;color: #005fd7'>print</span>(\
-  <span style='color: #008700'>&#39;Hello, World!&#39;</span>)
-  </code></pre></div>
-HTML
+NO_LANGUAGE_TREE_SITTER_HTML = read_test_file 'no_language_tree_sitter.html'
+
+NO_LANGUAGE_TREE_SITTER_INLINE_HTML = \
+  read_test_file 'no_language_tree_sitter_inline.html'
+
+PYTHON_TREE_SITTER_ROUGE_IDENTIFIER_HTML = \
+  read_test_file 'python_tree_sitter_rouge_identifier.html'
 
 PYTHON_MISSING_LANGUAGE_PARSER_MSG = 'Error retrieving language configuration for ' \
                                      "scope 'source.python': Language not found"
