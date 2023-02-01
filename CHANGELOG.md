@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 <!-- For changes in existing functionality -->
 
+- Refactored the project's test suite to read test data from stand-alone files. No
+  behavior changes were introduced as part of this refactor.
+
 ### Deprecated
 <!-- For soon-to-be removed features -->
 
