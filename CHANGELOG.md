@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Refactored the project's test suite. No behavior changes were introduced as part of
   this refactor.
+- Bumped the Rust dependency '[Anyhow](https://crates.io/crates/anyhow)' from version
+  1.0.68 to 1.0.69.
 
 ### Deprecated
 <!-- For soon-to-be removed features -->
