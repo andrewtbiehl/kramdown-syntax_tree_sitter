@@ -31,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 <!-- For any bug fixes -->
 
+- Updated a test to work with the test suite dependencies.
+
 ### Security
 <!-- In case of vulnerabilities -->
 
