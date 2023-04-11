@@ -5,11 +5,11 @@ require_relative 'lib/kramdown/syntax_tree_sitter/version'
 RUNTIME_DEPENDENCIES = [['kramdown', '~> 2.0'],
                         ['rake', '~> 13.0'],
                         ['rutie', '~> 0.0.4']].freeze
-DEVELOPMENT_DEPENDENCIES = [['minitest', '~> 5.0'],
-                            ['rouge', '~> 4.0'],
-                            ['rubocop', '~> 1.36'],
-                            ['rubocop-minitest', '~> 0.22'],
-                            ['rubocop-rake', '~> 0.6']].freeze
+DEVELOPMENT_DEPENDENCIES = [['minitest', '= 5.18.0'],
+                            ['rouge', '= 4.1.0'],
+                            ['rubocop', '= 1.50.0'],
+                            ['rubocop-minitest', '= 0.30.0'],
+                            ['rubocop-rake', '= 0.6.0']].freeze
 
 Gem::Specification.new do |spec|
   spec.name = 'kramdown-syntax_tree_sitter'
