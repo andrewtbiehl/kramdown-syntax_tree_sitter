@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 <!-- For new features -->
 
-- Added testing support for Rust version 1.67.
+- Added testing support for Rust version 1.67 and 1.68.
 
 ### Changed
 <!-- For changes in existing functionality -->
