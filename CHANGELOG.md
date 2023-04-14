@@ -23,6 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   level.
 - Bumped the Rust dependency '[Tree-sitter](https://crates.io/crates/tree-sitter)' from
   version 0.20.9 to 0.20.10.
+- Bumped the Rust dependency
+  '[Tree-sitter CLI](https://crates.io/crates/tree-sitter-cli)' from version 0.20.7 to
+  0.20.8.
 
 ### Deprecated
 <!-- For soon-to-be removed features -->
