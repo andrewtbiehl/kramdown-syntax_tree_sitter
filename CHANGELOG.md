@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   1.0.68 to 1.0.70.
 - Updated all test suite dependency version declarations to be fixed at the 'patch'
   level.
+- Bumped the Rust dependency '[Tree-sitter](https://crates.io/crates/tree-sitter)' from
+  version 0.20.9 to 0.20.10.
 
 ### Deprecated
 <!-- For soon-to-be removed features -->
@@ -28,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 <!-- For now removed features -->
 
-- Removed testing support for Rust version 1.62, 1.63, and 1.64.
+- Removed support for Rust version 1.62, 1.63, and 1.64.
 
 ### Fixed
 <!-- For any bug fixes -->
