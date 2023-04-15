@@ -10,10 +10,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 <!-- For new features -->
 
+### Changed
+<!-- For changes in existing functionality -->
+
+### Deprecated
+<!-- For soon-to-be removed features -->
+
+### Removed
+<!-- For now removed features -->
+
+### Fixed
+<!-- For any bug fixes -->
+
+### Security
+<!-- In case of vulnerabilities -->
+
+## [0.4.0] - 2023-04-15
+
+### Added
+
 - Added testing support for Rust version 1.67 and 1.68.
 
 ### Changed
-<!-- For changes in existing functionality -->
 
 - Refactored the project's test suite. No behavior changes were introduced as part of
   this refactor.
@@ -27,21 +45,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   '[Tree-sitter CLI](https://crates.io/crates/tree-sitter-cli)' from version 0.20.7 to
   0.20.8.
 
-### Deprecated
-<!-- For soon-to-be removed features -->
-
 ### Removed
-<!-- For now removed features -->
 
 - Removed support for Rust version 1.62, 1.63, and 1.64.
 
 ### Fixed
-<!-- For any bug fixes -->
 
 - Updated a test to work with the test suite dependencies.
-
-### Security
-<!-- In case of vulnerabilities -->
 
 ## [0.3.0] - 2023-01-11
 
@@ -79,7 +89,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This is a syntax highlighter plugin for Kramdown that leverages Tree-sitter's native
   syntax highlighter to highlight code blocks (and spans) when rendering HTML.
 
-[unreleased]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/releases/tag/v0.1.0
