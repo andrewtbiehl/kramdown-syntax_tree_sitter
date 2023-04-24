@@ -43,4 +43,9 @@ Gem::Specification.new do |spec|
                    'ext/**/Cargo.toml', 'ext/tasks.rake', 'lib/**/*.rb']
   spec.extensions = ['ext/Rakefile']
   spec.metadata['rubygems_mfa_required'] = 'true'
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = spec.homepage
+  spec.metadata['documentation_uri'] = "#{spec.homepage}/blob/main/README.md"
+  spec.metadata['changelog_uri'] = "#{spec.homepage}/blob/main/CHANGELOG.md"
+  spec.metadata['bug_tracker_uri'] = "#{spec.homepage}/issues"
 end
