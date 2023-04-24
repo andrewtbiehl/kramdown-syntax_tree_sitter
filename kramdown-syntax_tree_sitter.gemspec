@@ -10,6 +10,16 @@ Gem::Specification.new do |spec|
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 2.7'
   spec.homepage = 'https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter'
+  spec.description = <<~TEXT.chomp
+    This is a syntax highlighter plugin for Kramdown that leverages Tree-sitter's \
+    native syntax highlighter to highlight code blocks (and spans) when rendering HTML.
+
+    Tree-sitter is a modern, general-purpose parsing library that outclasses many \
+    existing tools at the task of syntax highlighting. This plugin adapts \
+    Tree-sitter's native highlighter for Kramdown, so that Tree-sitter's superior \
+    highlighting capabilities can be easily leveraged in the context of rendering \
+    Markdown.
+  TEXT
 
   spec.add_runtime_dependency 'kramdown', '~> 2.0'
   spec.add_runtime_dependency 'rake', '~> 13.0'
