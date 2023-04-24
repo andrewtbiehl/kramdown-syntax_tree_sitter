@@ -42,10 +42,12 @@ Gem::Specification.new do |spec|
   spec.files = Dir['LICENSE.txt', 'README.md', 'ext/**/*.rs', 'ext/**/Cargo.lock',
                    'ext/**/Cargo.toml', 'ext/tasks.rake', 'lib/**/*.rb']
   spec.extensions = ['ext/Rakefile']
-  spec.metadata['rubygems_mfa_required'] = 'true'
-  spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = spec.homepage
-  spec.metadata['documentation_uri'] = "#{spec.homepage}/blob/main/README.md"
-  spec.metadata['changelog_uri'] = "#{spec.homepage}/blob/main/CHANGELOG.md"
-  spec.metadata['bug_tracker_uri'] = "#{spec.homepage}/issues"
+  spec.metadata = {
+    'rubygems_mfa_required' => 'true',
+    'homepage_uri' => spec.homepage,
+    'source_code_uri' => spec.homepage,
+    'documentation_uri' => "#{spec.homepage}/blob/main/README.md",
+    'changelog_uri' => "#{spec.homepage}/blob/main/CHANGELOG.md",
+    'bug_tracker_uri' => "#{spec.homepage}/issues"
+  }
 end
