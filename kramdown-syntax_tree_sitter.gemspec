@@ -20,6 +20,14 @@ Gem::Specification.new do |spec|
     highlighting capabilities can be easily leveraged in the context of rendering \
     Markdown.
   TEXT
+  spec.requirements = <<~TEXT.chomp
+    This plugin is essentially an adapter for the Tree-sitter highlight library and \
+    hence requires a compatible Rust installation to function. It is officially \
+    compatible with the following environments:
+
+    - Rust: 1.66, 1.67, 1.68, 1.69
+    - Platforms: MacOS, Linux
+  TEXT
 
   spec.add_runtime_dependency 'kramdown', '~> 2.0'
   spec.add_runtime_dependency 'rake', '~> 13.0'
