@@ -179,7 +179,6 @@ module Kramdown
     end
 
     def test_that_it_can_use_tree_sitter_highlighting_on_an_embedded_language
-      skip 'This test currently fails due to an unresolved bug in the tool'
       actual = convert_to_html(
         TEST_DATA.fetch(:HTML_TREE_SITTER_EMBEDDED_LANGUAGE_MARKDOWN),
         :'tree-sitter',
