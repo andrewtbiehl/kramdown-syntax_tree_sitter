@@ -23,6 +23,7 @@ TEST_DATA =
     BAD_SYNTAX_PYTHON_TREE_SITTER_MARKDOWN: 'bad_syntax_python_tree_sitter.md',
     NO_LANGUAGE_TREE_SITTER_MARKDOWN: 'no_language_tree_sitter.md',
     NO_LANGUAGE_TREE_SITTER_INLINE_MARKDOWN: 'no_language_tree_sitter_inline.md',
+    HTML_TREE_SITTER_EMBEDDED_LANGUAGE_MARKDOWN: 'html_tree_sitter_embedded_language.md',
     PYTHON_NO_HIGHLIGHT_HTML: 'python_no_highlight.html',
     PYTHON_ROUGE_HTML: 'python_rouge.html',
     PYTHON_TREE_SITTER_HTML: 'python_tree_sitter.html',
@@ -33,7 +34,8 @@ TEST_DATA =
     BAD_SYNTAX_PYTHON_TREE_SITTER_HTML: 'bad_syntax_python_tree_sitter.html',
     NO_LANGUAGE_TREE_SITTER_HTML: 'no_language_tree_sitter.html',
     NO_LANGUAGE_TREE_SITTER_INLINE_HTML: 'no_language_tree_sitter_inline.html',
-    PYTHON_TREE_SITTER_ROUGE_IDENTIFIER_HTML: 'python_tree_sitter_rouge_identifier.html'
+    PYTHON_TREE_SITTER_ROUGE_IDENTIFIER_HTML: 'python_tree_sitter_rouge_identifier.html',
+    HTML_TREE_SITTER_EMBEDDED_LANGUAGE_HTML: 'html_tree_sitter_embedded_language.html'
   }
   .transform_values(&method(:read_test_file))
   .freeze
@@ -56,7 +58,7 @@ def convert_to_html(markdown, highlighter, highlighter_opts = {})
 end
 
 module Kramdown
-  class TestSyntaxHighlighting < Minitest::Test
+  class TestSyntaxHighlighting < Minitest::Test # rubocop:disable Metrics/ClassLength
     def test_that_tree_sitter_has_a_version_number
       refute_nil Converter::SyntaxHighlighter::TreeSitter::VERSION
     end
@@ -174,6 +176,16 @@ module Kramdown
       )
 
       assert_equal TEST_DATA.fetch(:PYTHON_TREE_SITTER_ROUGE_IDENTIFIER_HTML), actual
+    end
+
+    def test_that_it_can_use_tree_sitter_highlighting_on_an_embedded_language
+      actual = convert_to_html(
+        TEST_DATA.fetch(:HTML_TREE_SITTER_EMBEDDED_LANGUAGE_MARKDOWN),
+        :'tree-sitter',
+        { tree_sitter_parsers_dir: REAL_PARSERS_PATH }
+      )
+
+      assert_equal TEST_DATA.fetch(:HTML_TREE_SITTER_EMBEDDED_LANGUAGE_HTML), actual
     end
   end
 end

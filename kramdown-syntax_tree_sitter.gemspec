@@ -33,12 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rake', '~> 13.0'
   spec.add_runtime_dependency 'rutie', '~> 0.0.4'
 
-  spec.add_development_dependency 'minitest', '= 5.18.0'
-  spec.add_development_dependency 'rouge', '= 4.1.1'
-  spec.add_development_dependency 'rubocop', '= 1.50.2'
-  spec.add_development_dependency 'rubocop-minitest', '= 0.31.0'
-  spec.add_development_dependency 'rubocop-rake', '= 0.6.0'
-
   spec.files = Dir['LICENSE.txt', 'README.md', 'ext/**/*.rs', 'ext/**/Cargo.lock',
                    'ext/**/Cargo.toml', 'ext/tasks.rake', 'lib/**/*.rb']
   spec.extensions = ['ext/Rakefile']

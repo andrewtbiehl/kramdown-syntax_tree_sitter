@@ -9,6 +9,8 @@ use tree_sitter_highlight::{Error as TSError, HighlightEvent};
 use tree_sitter_highlight::{Highlight, HighlightConfiguration, Highlighter, HtmlRenderer};
 use tree_sitter_loader::{Config, LanguageConfiguration, Loader};
 
+use std::collections::HashSet;
+
 const LOADER_ERROR_MSG: &str = "Error loading Tree-sitter parsers from directory";
 const NO_LANGUAGE_ERROR_MSG: &str = "Error retrieving language configuration for scope";
 const NO_HIGHLIGHT_ERROR_MSG: &str = "Error retrieving highlight configuration for scope";
@@ -105,10 +107,22 @@ fn render_html(
     Ok(renderer.lines().collect())
 }
 
-fn highlight_names(scope: &str, loader: &Loader) -> Result<Vec<String>> {
+fn highlight_names_for_language(scope: &str, loader: &Loader) -> Result<Vec<String>> {
     let (language, config) = language_and_configuration(loader, scope)?;
     let highlight_config = highlight_configuration(language, config, scope)?;
-    Ok(highlight_config.names().iter().map(String::from).collect())
+    Ok(highlight_config.names().to_vec())
+}
+
+fn highlight_names(parser_directory: PathBuf) -> Result<Vec<String>> {
+    let loader = loader(parser_directory)?;
+    let highlight_names = loader
+        .get_all_language_configurations()
+        .into_iter()
+        .flat_map(|(config, _)| config.scope.clone())
+        .flat_map(|scope| highlight_names_for_language(&scope, &loader))
+        .flat_map(Vec::into_iter)
+        .collect::<HashSet<_>>();
+    Ok(highlight_names.into_iter().collect())
 }
 
 fn highlight_name_styles() -> HashMap<String, Style> {
@@ -146,8 +160,8 @@ fn highlight_adapter(
     css_classes: bool,
 ) -> Result<String> {
     let parsers_dir = PathBuf::from(parsers_dir);
-    let mut loader = loader(parsers_dir)?;
-    let highlight_names = highlight_names(scope, &loader)?;
+    let mut loader = loader(parsers_dir.clone())?;
+    let highlight_names = highlight_names(parsers_dir)?;
     loader.configure_highlights(&highlight_names);
     let (language, config) = language_and_configuration(&loader, scope)?;
     let highlight_config = highlight_configuration(language, config, scope)?;

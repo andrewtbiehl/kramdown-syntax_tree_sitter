@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 <!-- For changes in existing functionality -->
 
+- Moved all development dependency declarations from the gem specification file to the
+  Gemfile.
+
 ### Deprecated
 <!-- For soon-to-be removed features -->
 
@@ -25,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 <!-- For any bug fixes -->
+
+- Fixed a bug in which the tool failed to highlighted languages embedded in other
+  languages.
 
 ### Security
 <!-- In case of vulnerabilities -->
