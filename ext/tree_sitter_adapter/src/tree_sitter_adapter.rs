@@ -108,7 +108,7 @@ fn render_html(
 fn highlight_names(scope: &str, loader: &Loader) -> Result<Vec<String>> {
     let (language, config) = language_and_configuration(loader, scope)?;
     let highlight_config = highlight_configuration(language, config, scope)?;
-    Ok(highlight_config.names().iter().map(String::from).collect())
+    Ok(highlight_config.names().to_vec())
 }
 
 fn highlight_name_styles() -> HashMap<String, Style> {
