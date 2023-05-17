@@ -56,7 +56,7 @@ def convert_to_html(markdown, highlighter, highlighter_opts = {})
 end
 
 module Kramdown
-  class TestSyntaxHighlighting < Minitest::Test
+  class TestSyntaxHighlighting < Minitest::Test # rubocop:disable Metrics/ClassLength
     def test_that_tree_sitter_has_a_version_number
       refute_nil Converter::SyntaxHighlighter::TreeSitter::VERSION
     end
