@@ -10,13 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 <!-- For new features -->
 
-- Added testing support for Rust version 1.69.
-
 ### Changed
 <!-- For changes in existing functionality -->
-
-- Moved all development dependency declarations from the gem specification file to the
-  Gemfile.
 
 ### Deprecated
 <!-- For soon-to-be removed features -->
@@ -24,16 +19,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 <!-- For now removed features -->
 
-- Removed testing support for Rust version 1.65.
-
 ### Fixed
 <!-- For any bug fixes -->
 
-- Fixed a bug in which the tool failed to highlight languages embedded in other
-  languages.
-
 ### Security
 <!-- In case of vulnerabilities -->
+
+## [0.5.0] - 2023-05-18
+
+### Added
+
+- Added testing support for Rust version 1.69.
+
+### Changed
+
+- Moved all development dependency declarations from the gem specification file to the
+  Gemfile.
+
+### Removed
+
+- Removed testing support for Rust version 1.65.
+
+### Fixed
+
+- Fixed a bug in which the tool failed to highlight languages embedded in other
+  languages.
 
 ## [0.4.0] - 2023-04-15
 
@@ -99,7 +109,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This is a syntax highlighter plugin for Kramdown that leverages Tree-sitter's native
   syntax highlighter to highlight code blocks (and spans) when rendering HTML.
 
-[unreleased]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.4.0...HEAD
+[unreleased]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter/compare/v0.1.0...v0.2.0
