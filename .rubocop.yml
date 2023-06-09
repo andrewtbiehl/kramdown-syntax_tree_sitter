@@ -3,5 +3,3 @@ require:
   - rubocop-rake
 AllCops:
   NewCops: enable
-Gemspec/RequireMFA:
-  Enabled: false
