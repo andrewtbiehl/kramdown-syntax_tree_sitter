@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'minitest', '5.18.1'
+gem 'minitest', '5.19.0'
 gem 'rouge', '4.1.2'
 gem 'rubocop', '1.55.0'
 gem 'rubocop-minitest', '0.31.0'
