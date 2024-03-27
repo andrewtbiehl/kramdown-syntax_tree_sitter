@@ -39,6 +39,7 @@ module Kramdown
             'source.ruby' => %w[rb ruby],
             'source.rust' => %w[rs rust],
             'source.scala' => %w[scala],
+            'source.solidity' => %w[solidity],
             'source.sparql' => %w[sparql],
             'source.sql' => %w[sql],
             'source.swift' => %w[swift],
