@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- For changes in existing functionality -->
 
 - Bumped the Rust dependency '[Anyhow](https://crates.io/crates/anyhow)' from version
-  1.0.71 to 1.0.75.
+  1.0.71 to 1.0.82.
 
 ### Deprecated
 <!-- For soon-to-be removed features -->
