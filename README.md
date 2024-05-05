@@ -23,7 +23,7 @@ hence also requires a compatible [Rust](https://www.rust-lang.org) installation 
 function. It is officially compatible with the following environments:
 
 - **Ruby**: 2.7, 3.0, 3.1, 3.2
-- **Rust**: 1.69, 1.70, 1.71, 1.72, 1.73
+- **Rust**: 1.70, 1.71, 1.72, 1.73
 - **Platforms**: MacOS, Linux
 
 ### Installation
