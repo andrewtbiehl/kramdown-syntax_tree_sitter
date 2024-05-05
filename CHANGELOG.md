@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 <!-- For now removed features -->
 
-- Removed testing support for Rust version 1.66 and 1.67.
+- Removed testing support for Rust version 1.66, 1.67, and 1.68.
 
 ### Fixed
 <!-- For any bug fixes -->
