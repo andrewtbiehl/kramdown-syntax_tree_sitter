@@ -60,7 +60,7 @@ fn highlight_configuration<'a>(
     scope: &'a str,
 ) -> Result<&'a HighlightConfiguration> {
     config
-        .highlight_config(language)
+        .highlight_config(language, None)
         .transpose()
         .with_context(|| format!("{NO_HIGHLIGHT_ERROR_MSG} '{scope}'"))
         .flatten_()
