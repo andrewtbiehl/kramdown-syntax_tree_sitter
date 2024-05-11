@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- For now removed features -->
 
 - Removed testing support for Rust version 1.66, 1.67, 1.68, and 1.69.
+- Removed testing support for MacOS version 11 (Big Sur).
 
 ### Fixed
 <!-- For any bug fixes -->
