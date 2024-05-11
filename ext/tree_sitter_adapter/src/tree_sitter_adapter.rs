@@ -130,7 +130,7 @@ fn highlight_name_styles() -> HashMap<String, Style> {
     theme
         .highlight_names
         .into_iter()
-        .zip(theme.styles.into_iter())
+        .zip(theme.styles)
         .collect()
 }
 
