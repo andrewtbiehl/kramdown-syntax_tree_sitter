@@ -110,7 +110,11 @@ fn render_html(
 fn highlight_names_for_language(scope: &str, loader: &Loader) -> Result<Vec<String>> {
     let (language, config) = language_and_configuration(loader, scope)?;
     let highlight_config = highlight_configuration(language, config, scope)?;
-    Ok(highlight_config.names().to_vec())
+    Ok(highlight_config
+        .names()
+        .iter()
+        .map(ToString::to_string)
+        .collect())
 }
 
 fn highlight_names(parser_directory: PathBuf) -> Result<Vec<String>> {
