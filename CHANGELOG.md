@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 <!-- For changes in existing functionality -->
 
+- Updated the Tree-sitter scope for HTML that the Rouge identifier for HTML maps to.
 - Bumped the Rust dependency '[Anyhow](https://crates.io/crates/anyhow)' from version
   1.0.71 to 1.0.86.
 - Bumped the Rust dependency '[Tree-sitter](https://crates.io/crates/tree-sitter)' from
