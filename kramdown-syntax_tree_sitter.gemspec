@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
     hence requires a compatible Rust installation to function. It is officially \
     compatible with the following environments:
 
-    - Rust: 1.66, 1.67, 1.68, 1.69
+    - Rust: 1.74, 1.75, 1.76, 1.77
     - Platforms: MacOS, Linux
   TEXT
 
