@@ -9,8 +9,8 @@ crate-type = ["cdylib"]
 
 [dependencies]
 anyhow = "*"
+magnus = { version = "*", features = ["embed"] }
 tree-sitter = "*"
 tree-sitter-cli = "*"
 tree-sitter-highlight = "*"
 tree-sitter-loader = "*"
-rutie = "*"
