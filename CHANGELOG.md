@@ -24,16 +24,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bumped the Rust dependency '[Anyhow](https://crates.io/crates/anyhow)' from version
   1.0.71 to 1.0.86.
 - Bumped the Rust dependency '[Tree-sitter](https://crates.io/crates/tree-sitter)' from
-  version 0.20.10 to 0.21.0.
+  version 0.20.10 to 0.22.6.
 - Bumped the Rust dependency
   '[Tree-sitter CLI](https://crates.io/crates/tree-sitter-cli)' from version 0.20.8 to
-  0.21.0.
+  0.22.6.
 - Bumped the Rust dependency
   '[Tree-sitter Highlight](https://crates.io/crates/tree-sitter-highlight)' from version
-  0.20.1 to 0.21.0.
+  0.20.1 to 0.22.6.
 - Bumped the Rust dependency
   '[Tree-sitter Loader](https://crates.io/crates/tree-sitter-loader)' from version
-  0.20.0 to 0.21.0.
+  0.20.0 to 0.22.6.
 
 ### Deprecated
 <!-- For soon-to-be removed features -->
