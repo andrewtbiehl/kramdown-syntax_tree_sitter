@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.summary = 'Syntax highlight code with Tree-sitter via Kramdown.'
   spec.author = 'Andrew T. Biehl'
   spec.license = 'MIT'
-  spec.required_ruby_version = '>= 2.7'
+  spec.required_ruby_version = '>= 3.0'
   spec.homepage = 'https://github.com/andrewtbiehl/kramdown-syntax_tree_sitter'
   spec.description = <<~TEXT.chomp
     This is a syntax highlighter plugin for Kramdown that leverages Tree-sitter's \
