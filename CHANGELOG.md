@@ -10,12 +10,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 <!-- For new features -->
 
+### Changed
+<!-- For changes in existing functionality -->
+
+### Deprecated
+<!-- For soon-to-be removed features -->
+
+### Removed
+<!-- For now removed features -->
+
+### Fixed
+<!-- For any bug fixes -->
+
+### Security
+<!-- In case of vulnerabilities -->
+
+## [0.6.0] - 2024-05-31
+
+### Added
+
 - Added testing support for Ruby version 3.3.
 - Added testing support for Rust version 1.75, 1.76, 1.77, and 1.78.
 - Added testing support for MacOS version 13 (Ventura).
 
 ### Changed
-<!-- For changes in existing functionality -->
 
 - Updated the Tree-sitter scope for HTML that the Rouge identifier for HTML maps to.
 - Replaced the Rust dependency [Rutie](https://github.com/danielpclark/rutie), used for
@@ -36,21 +54,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   '[Tree-sitter Loader](https://crates.io/crates/tree-sitter-loader)' from version
   0.20.0 to 0.22.6.
 
-### Deprecated
-<!-- For soon-to-be removed features -->
-
 ### Removed
-<!-- For now removed features -->
 
 - Removed testing support for Ruby version 2.7.
 - Removed testing support for Rust version 1.66, 1.67, 1.68, and 1.69.
 - Removed testing support for MacOS version 11 (Big Sur).
-
-### Fixed
-<!-- For any bug fixes -->
-
-### Security
-<!-- In case of vulnerabilities -->
 
 ## [0.5.0] - 2023-05-18
 
