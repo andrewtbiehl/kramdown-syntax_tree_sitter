@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 <!-- For new features -->
 
+- Added testing support for Ruby version 3.3.
 - Added testing support for Rust version 1.75, 1.76, 1.77, and 1.78.
 - Added testing support for MacOS version 13 (Ventura).
 
