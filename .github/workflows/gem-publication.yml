@@ -16,7 +16,7 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4.1.7
       - name: Install project-compatible Ruby
-        uses: ruby/setup-ruby@v1.180.1
+        uses: ruby/setup-ruby@v1.182.0
         with:
           ruby-version: 3.3.2
           bundler: 2.5.11
