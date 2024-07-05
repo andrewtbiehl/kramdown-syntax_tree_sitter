@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Bumped the Rust dependency '[Magnus](https://github.com/matsadler/magnus)' from
   version 0.6.4 to 0.7.1.
+- Bumped some transitive dependencies used by the internal Rust library.
 
 ### Deprecated
 <!-- For soon-to-be removed features -->
