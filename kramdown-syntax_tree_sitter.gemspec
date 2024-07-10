@@ -29,9 +29,9 @@ Gem::Specification.new do |spec|
     - Platforms: MacOS, Linux
   TEXT
 
-  spec.add_runtime_dependency 'kramdown', '~> 2.0'
-  spec.add_runtime_dependency 'rake', '~> 13.0'
-  spec.add_runtime_dependency 'rutie', '~> 0.0.4'
+  spec.add_dependency 'kramdown', '~> 2.0'
+  spec.add_dependency 'rake', '~> 13.0'
+  spec.add_dependency 'rutie', '~> 0.0.4'
 
   spec.files = Dir['LICENSE.txt', 'README.md', 'ext/**/*.rs', 'ext/**/Cargo.lock',
                    'ext/**/Cargo.toml', 'ext/tasks.rake', 'lib/**/*.rb']
