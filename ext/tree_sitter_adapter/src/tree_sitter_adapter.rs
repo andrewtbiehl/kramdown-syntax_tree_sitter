@@ -82,13 +82,15 @@ fn highlights(
 
 fn create_html_attribute_callback<'a>(
     html_attributes: &'a [String],
-) -> impl Fn(Highlight) -> &'a [u8] {
-    |highlight| {
-        html_attributes
-            .get(highlight.0)
-            .map(String::as_str)
-            .unwrap_or_default()
-            .as_bytes()
+) -> impl Fn(Highlight, &mut Vec<u8>) + use<'a> {
+    |highlight, html| {
+        html.extend(
+            html_attributes
+                .get(highlight.0)
+                .map(String::as_str)
+                .unwrap_or_default()
+                .as_bytes(),
+        )
     }
 }
 
@@ -144,7 +146,7 @@ fn inline_css_attributes(highlight_names: &[String]) -> Vec<String> {
         .iter()
         .map(|n| highlight_name_styles.get(n))
         .map(|o| o.and_then(|style| style.css.as_ref()))
-        .map(|o| o.map(String::from))
+        .map(|o| o.map(|s| "style='".to_string() + s + "'"))
         .map(Option::unwrap_or_default)
         .collect()
 }
