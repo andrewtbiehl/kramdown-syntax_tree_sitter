@@ -2,6 +2,7 @@
 
 require 'kramdown'
 require 'tree_sitter_adapter'
+require 'rouge'
 
 require_relative '../../syntax_tree_sitter/languages'
 
@@ -18,15 +19,26 @@ module Kramdown
         def self.call(converter, raw_text, language_alias, type, _)
           return nil unless language_alias
 
-          language_scope = LANGUAGE_SCOPES.fetch(language_alias, language_alias)
-          rendered_text = TreeSitterAdapter.highlight(
-            raw_text,
-            get_parsers_dir(converter),
-            language_scope,
-            get_use_css_classes(converter)
-          )
+          begin
+            language_scope = LANGUAGE_SCOPES.fetch(language_alias, language_alias)
+            rendered_text = TreeSitterAdapter.highlight(
+              raw_text,
+              get_parsers_dir(converter),
+              language_scope,
+              get_use_css_classes(converter)
+            )
+          rescue => e
+            if get_fallback_to_rouge(converter)
+              STDERR.puts "Falling back to rouge for syntax highlighting: #{e}"
+              rendered_text = Rouge.highlight(raw_text, language_alias, 'html')
+              attributes="class=\"highlight\""
+            else
+              raise
+            end
+          end
+
           # Code blocks are additionally wrapped in HTML code tags
-          type == :block ? "<pre><code>#{rendered_text}</code></pre>" : rendered_text
+          type == :block ? "<pre><code #{attributes}>#{rendered_text}</code></pre>" : rendered_text
         end
 
         def self.get_parsers_dir(converter)
@@ -37,6 +49,10 @@ module Kramdown
 
         def self.get_use_css_classes(converter)
           get_option(converter, :css_classes) || false
+        end
+
+        def self.get_fallback_to_rouge(converter)
+          get_option(converter, :fallback_to_rouge) || false
         end
 
         def self.get_option(converter, name)
